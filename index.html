@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bao Kekana — Developer</title>
+<meta name="description" content="Bao Kekana — Computer Science student and self-taught front-end developer. Projects, skills, and background.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <span class="nav-logo">bao<span class="nav-dot">@</span>dev</span>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#projects">projects</a>
+      <a href="#skills">skills</a>
+      <a href="#education">education</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="hero-eyebrow">~/bao-kekana <span class="cursor-blink">$</span> whoami</p>
+        <h1 class="hero-title">Bao Kekana</h1>
+        <p class="hero-role">Computer Science student &amp; Aspiring AI Engineer</p>
+        <p class="hero-pitch">
+          I build real, working software—not just coursework. I'm currently completing a BSc in Computer Science at the University of South Africa (UNISA) while further developing my practical software engineering skills through Melsoft Academy. I enjoy building user-focused web applications, learning modern development tools, and continuously improving through hands-on projects.
+          
+        </p>
+        <div class="hero-links">
+          <a class="btn btn-primary" href="mailto:bao.kekana@icloud.com">Get in touch</a>
+          <a class="btn btn-ghost" href="https://github.com/Bao992" target="_blank" rel="noopener">View GitHub &#8599;</a>
+        </div>
+      </div>
+
+      <figure class="photo-window" aria-label="Photo of Bao Kekana">
+        <div class="photo-window-bar">
+          <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+          <span class="photo-window-name">bao.png</span>
+        </div>
+        <img <img class="photo-window-img" src="bao.png" alt="Bao Kekana" width="516" height="484">
+      </figure>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills" id="skills">
+    <p class="section-label">skills <span class="dim">// log --oneline</span></p>
+    <div class="terminal-block" role="list">
+      <p class="term-line" role="listitem"><span class="term-tag">languages</span> HTML5 · CSS3 · JavaScript · Python · Java</p>
+      <p class="term-line" role="listitem"><span class="term-tag">fundamentals</span> data structures · algorithms · OOP · operating systems · discrete maths</p>
+      <p class="term-line" role="listitem"><span class="term-tag">tools</span> Git &amp; GitHub · VS Code · Claude AI and Chatgpt</p>
+      <p class="term-line term-learning" role="listitem"><span class="term-tag">learning now</span> SQL · TypeScript </p>
+    </div>
+  </section>
+
+  <!-- PROJECTS — signature commit-log element -->
+  <section class="projects" id="projects">
+    <p class="section-label">projects <span class="dim">// git log --stat</span></p>
+
+    <article class="commit">
+      <div class="commit-meta">
+        <span class="commit-hash">a3f9c12</span>
+        <span class="commit-date">2024</span>
+      </div>
+      <h3 class="commit-title">build: MediDoor — healthcare platform frontend</h3>
+      <ul class="commit-diff">
+        <li class="add">+ multi-page structure with consistent nav, layout and forms</li>
+        <li class="add">+ practiced building a site the way a real product needs it, not a single page</li>
+      </ul>
+      <div class="commit-stack">
+        <span>HTML</span><span>CSS</span>
+      </div>
+      <a class="commit-link" href="https://github.com/Bao992/MediDoor-Frontend" target="_blank" rel="noopener">view repo &#8594;</a>
+    </article>
+
+    <article class="commit">
+      <div class="commit-meta">
+        <span class="commit-hash">7d21e4b</span>
+        <span class="commit-date">2024</span>
+      </div>
+      <h3 class="commit-title">feat: Edu Habit Tracker — study routine app</h3>
+      <ul class="commit-diff">
+        <li class="add">+ tracks student study habits over time with real interactivity</li>
+        <li class="add">+ first project with actual state, not just static markup</li>
+      </ul>
+      <div class="commit-stack">
+        <span>HTML</span><span>CSS</span><span>JavaScript</span>
+      </div>
+      <a class="commit-link" href="https://github.com/Bao992/Edu-Habit-Tracker" target="_blank" rel="noopener">view repo &#8594;</a>
+    </article>
+
+    <article class="commit">
+      <div class="commit-meta">
+        <span class="commit-hash">c88a02f</span>
+        <span class="commit-date">2023</span>
+      </div>
+      <h3 class="commit-title">clone: Google Keep UI</h3>
+      <ul class="commit-diff">
+        <li class="add">+ rebuilt note-taking UI/UX to study a shipped product's structure</li>
+      </ul>
+      <div class="commit-stack">
+        <span>HTML</span><span>CSS</span><span>JavaScript</span>
+      </div>
+      <a class="commit-link" href="https://github.com/Bao992/Google-Keep-clone" target="_blank" rel="noopener">view repo &#8594;</a>
+    </article>
+
+    <article class="commit">
+      <div class="commit-meta">
+        <span class="commit-hash">0f41b9a</span>
+        <span class="commit-date">2023</span>
+      </div>
+      <h3 class="commit-title">clone: YouTube UI</h3>
+      <ul class="commit-diff">
+        <li class="add">+ recreated layout and styling of a media-heavy interface</li>
+      </ul>
+      <div class="commit-stack">
+        <span>HTML</span><span>CSS</span>
+      </div>
+      <a class="commit-link" href="https://github.com/Bao992/Youtube-clone" target="_blank" rel="noopener">view repo &#8594;</a>
+    </article>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="education" id="education">
+    <p class="section-label">education &amp; credentials <span class="dim">// README.md</span></p>
+    <div class="readme-card">
+      <h3>BSc Computer Science — University of South Africa (UNISA)</h3>
+      <p class="readme-status">In progress · 336/360 NQF credits completed</p>
+      <p>Majors in Computer Science and Mathematics. Distinctions in Theoretical Computer Science I,
+        Programming: Data Structures &amp; Operating Systems, Numerical Methods I &amp; II, Differential
+        Equations, and Formal Logic.</p>
+    </div>
+    <div class="readme-card">
+      <h3>Certificate of Competence — Advanced HTML (NQF Level 5)</h3>
+      <p class="readme-status">ZAIO Institute of Technology · 2025 · MICT SETA accredited</p>
+      <p>Applying advanced HTML and associated techniques to build websites for business applications.</p>
+    </div>
+    <div class="readme-card">
+      <h3>National Senior Certificate (Matric)</h3>
+      <p class="readme-status">South Africa</p>
+      <p>Met minimum requirements for admission to Bachelor's degree study.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <p class="section-label">contact <span class="dim">// Phone: +27 69 187 4414 or +27 851 1240    Email:bao.kekana@icloud.com </span></p>
+    <p class="contact-line">
+      Open to junior developer, internship and learnership roles.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:bao.kekana@icloud.com">bao.kekana@icloud.com</a>
+      <a href="https://github.com/Bao992" target="_blank" rel="noopener">github.com/Bao992</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Built by Bao Kekana with plain HTML, CSS and JavaScript.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
