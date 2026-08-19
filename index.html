@@ -4,175 +4,378 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bao Kekana — Developer</title>
-<meta name="description" content="Bao Kekana — Computer Science student and self-taught front-end developer. Projects, skills, and background.">
+<meta name="description" content="Bao Kekana — Computer Science student & developer. Portfolio built as a git log.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:         #0a0d12;
+    --panel:      #10141b;
+    --panel-2:    #0d1117;
+    --border:     #1c2330;
+    --text:       #c7d1de;
+    --muted:      #5b6577;
+    --dim:        #3a4252;
+    --green:      #3fd68c;
+    --green-dim:  #245b40;
+    --amber:      #e3b341;
+    --red:        #f0665e;
+    --blue:       #6ab7ff;
+    --purple:     #b088f5;
+    --mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--mono);
+    font-size:15px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(63,214,140,0.05), transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(106,183,255,0.05), transparent 40%);
+  }
+
+  a{ color:var(--blue); text-decoration:none; border-bottom:1px solid transparent; }
+  a:hover{ border-bottom-color:var(--blue); }
+  a:focus-visible, button:focus-visible, summary:focus-visible{
+    outline:2px solid var(--green); outline-offset:3px; border-radius:2px;
+  }
+
+  ::selection{ background:var(--green-dim); color:#eafff4; }
+
+  .wrap{ max-width:820px; margin:0 auto; padding:56px 20px 120px; }
+
+  /* ---------- terminal window chrome ---------- */
+  .term{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:8px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+    overflow:hidden;
+  }
+  .term-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:11px 14px;
+    background:var(--panel-2);
+    border-bottom:1px solid var(--border);
+  }
+  .dot{ width:11px; height:11px; border-radius:50%; }
+  .dot.r{ background:#f0665e55; border:1px solid #f0665e88; }
+  .dot.y{ background:#e3b34155; border:1px solid #e3b34188; }
+  .dot.g{ background:#3fd68c55; border:1px solid #3fd68c88; }
+  .term-title{
+    flex:1; text-align:center;
+    color:var(--muted); font-size:12.5px; letter-spacing:.02em;
+  }
+  .term-body{ padding:34px 30px 10px; }
+
+  @media (max-width:600px){
+    .wrap{ padding:28px 12px 90px; }
+    .term-body{ padding:26px 16px 8px; }
+  }
+
+  /* ---------- prompt lines ---------- */
+  .cmd{
+    display:flex; gap:10px; align-items:baseline;
+    margin:0 0 14px;
+    color:var(--muted);
+    font-size:13.5px;
+  }
+  .cmd .prompt{ color:var(--green); }
+  .cmd .path{ color:var(--purple); }
+  .cmd .arg{ color:var(--text); }
+
+  section{ margin-bottom:52px; }
+  section:last-of-type{ margin-bottom:8px; }
+
+  .out{ padding-left:2px; margin-bottom:4px; }
+
+  /* ---------- hero ---------- */
+  .hero-name{
+    font-size:clamp(28px, 5vw, 40px);
+    font-weight:700;
+    color:#f2f5f9;
+    letter-spacing:-0.01em;
+    margin-bottom:6px;
+  }
+  .hero-role{ color:var(--green); font-size:15px; margin-bottom:18px; }
+  .hero-role::before{ content:'// '; color:var(--dim); }
+
+  .cursor{
+    display:inline-block; width:8px; height:1.1em;
+    background:var(--green); vertical-align:text-bottom;
+    animation:blink 1s steps(1) infinite;
+    margin-left:2px;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+  @media (prefers-reduced-motion:reduce){ .cursor{ animation:none; opacity:1; } }
+
+  .hero-desc{ color:var(--text); max-width:56ch; }
+  .hero-desc .k{ color:var(--amber); }
+
+  .hero-links{ display:flex; flex-wrap:wrap; gap:18px; margin-top:22px; font-size:13.5px; }
+  .hero-links a{ color:var(--muted); border:1px solid var(--border); padding:6px 12px; border-radius:5px; }
+  .hero-links a:hover{ color:var(--green); border-color:var(--green-dim); }
+
+  /* ---------- section headers ---------- */
+  h2.sec{
+    font-size:13px; text-transform:uppercase; letter-spacing:.12em;
+    color:var(--dim); margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  h2.sec::after{ content:''; flex:1; height:1px; background:var(--border); }
+
+  /* ---------- about ---------- */
+  .about p{ color:var(--text); max-width:64ch; margin-bottom:12px; }
+  .about .comment{ color:var(--dim); }
+  .about .field{ color:var(--muted); }
+  .about .val{ color:var(--text); }
+
+  /* ---------- skills (ls -la) ---------- */
+  .skills-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr);
+    gap:2px 28px; font-size:13.5px;
+  }
+  @media (max-width:600px){ .skills-grid{ grid-template-columns:1fr; } }
+  .skill-row{
+    display:flex; justify-content:space-between; gap:10px;
+    padding:7px 0; border-bottom:1px dashed var(--border);
+    color:var(--text);
+  }
+  .skill-row span.tag{ color:var(--dim); font-size:11.5px; }
+  .skill-row.learning span.tag{ color:var(--amber); }
+  .skill-row.core span.tag{ color:var(--green); }
+
+  /* ---------- projects (git log) ---------- */
+  .commit{
+    position:relative;
+    padding:0 0 30px 26px;
+    border-left:1px solid var(--border);
+  }
+  .commit:last-child{ padding-bottom:2px; }
+  .commit::before{
+    content:''; position:absolute; left:-5px; top:5px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--panel); border:2px solid var(--green);
+  }
+  .commit-head{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:10px;
+    margin-bottom:6px;
+  }
+  .hash{ color:var(--amber); font-size:13px; }
+  .commit-msg{ color:#eef2f7; font-weight:600; font-size:15.5px; }
+  .commit-meta{ color:var(--dim); font-size:12px; margin-bottom:10px; }
+  .commit-body{ color:var(--text); max-width:62ch; margin-bottom:12px; }
+  .diffstat{
+    display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;
+  }
+  .diffstat span{
+    font-size:11.5px; padding:3px 8px; border-radius:4px;
+    background:var(--panel-2); border:1px solid var(--border); color:var(--muted);
+  }
+  .commit-links{ display:flex; gap:16px; font-size:13px; }
+  .commit-links a::before{ content:'→ '; color:var(--dim); }
+  .commit-links a.muted{ color:var(--dim); cursor:default; }
+  .commit-links a.muted::after{ content:' (private repo — link on request)'; font-size:11px; }
+  .commit-links a.muted:hover{ border-bottom-color:transparent; }
+
+  /* ---------- education (cat) ---------- */
+  .edu-item{ margin-bottom:16px; }
+  .edu-item .title{ color:#eef2f7; font-weight:600; }
+  .edu-item .sub{ color:var(--muted); font-size:13px; }
+
+  /* ---------- contact ---------- */
+  .contact-lines{ font-size:14px; }
+  .contact-lines div{ margin-bottom:9px; display:flex; gap:12px; }
+  .contact-lines .k{ color:var(--dim); width:92px; flex-shrink:0; }
+
+  footer{
+    text-align:center; color:var(--dim); font-size:12px;
+    margin-top:60px; padding-top:24px; border-top:1px solid var(--border);
+  }
+</style>
 </head>
 <body>
 
-<a class="skip-link" href="#main">Skip to content</a>
+<div class="wrap">
+  <div class="term">
+    <div class="term-bar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="term-title">bao@portfolio — zsh — 82×40</span>
+    </div>
 
-<header class="nav">
-  <div class="nav-inner">
-    <span class="nav-logo">bao<span class="nav-dot">@</span>dev</span>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="#projects">projects</a>
-      <a href="#skills">skills</a>
-      <a href="#education">education</a>
-      <a href="#contact">contact</a>
-    </nav>
-  </div>
-</header>
+    <div class="term-body">
 
-<main id="main">
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <p class="hero-eyebrow">~/bao-kekana <span class="cursor-blink">$</span> whoami</p>
-        <h1 class="hero-title">Bao Kekana</h1>
-        <p class="hero-role">Computer Science student &amp; Aspiring AI Engineer</p>
-        <p class="hero-pitch">
-          I build real, working software—not just coursework. I'm currently completing a BSc in Computer Science at the University of South Africa (UNISA) while further developing my practical software engineering skills through Melsoft Academy. I enjoy building user-focused web applications, learning modern development tools, and continuously improving through hands-on projects.
-          
+      <!-- HERO -->
+      <section>
+        <div class="cmd"><span class="prompt">bao@dev</span>:<span class="path">~</span>$ <span class="arg">whoami</span></div>
+        <div class="hero-name">Bao Kekana<span class="cursor" aria-hidden="true"></span></div>
+        <div class="hero-role">final-year computer science student — full-stack developer</div>
+        <p class="hero-desc">
+          Pretoria/Johannesburg-based developer finishing a <span class="k">BSc Computer Science</span> at UNISA,
+          currently building full-stack projects through the <span class="k">Melsoft Academy AI Fullstack Engineering Program</span>.
+          I use AI tools daily as part of how I build, debug and ship — not just as a novelty. Looking for a junior role
+          where I can keep learning fast and contribute from day one.
         </p>
         <div class="hero-links">
-          <a class="btn btn-primary" href="mailto:bao.kekana@icloud.com">Get in touch</a>
-          <a class="btn btn-ghost" href="https://github.com/Bao992" target="_blank" rel="noopener">View GitHub &#8599;</a>
+          <a href="https://github.com/Bao992" target="_blank" rel="noopener">github.com/Bao992</a>
+          <a href="https://www.linkedin.com/in/bao-kekana-080a40322" target="_blank" rel="noopener">linkedin.com/in/bao-kekana</a>
+          <a href="mailto:bao.kekana@icloud.com">bao.kekana@icloud.com</a>
         </div>
-      </div>
+      </section>
 
-      <figure class="photo-window" aria-label="Photo of Bao Kekana">
-        <div class="photo-window-bar">
-          <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
-          <span class="photo-window-name">bao.png</span>
+      <!-- ABOUT -->
+      <section class="about" id="about">
+        <div class="cmd"><span class="prompt">bao@dev</span>:<span class="path">~</span>$ <span class="arg">cat about.md</span></div>
+        <h2 class="sec">about</h2>
+        <p><span class="comment"># currently</span></p>
+        <p><span class="field">status</span> → <span class="val">final-year student, actively job-hunting for junior/graduate developer roles</span></p>
+        <p><span class="field">focus</span> → <span class="val">React, TypeScript, Tailwind CSS, and AI-assisted full-stack development</span></p>
+        <p><span class="field">approach</span> → <span class="val">learn by shipping — every project below is real, deployed, and built end-to-end rather than left as a tutorial clone</span></p>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <div class="cmd"><span class="prompt">bao@dev</span>:<span class="path">~/skills</span>$ <span class="arg">ls -la</span></div>
+        <h2 class="sec">skills</h2>
+        <div class="skills-grid">
+          <div class="skill-row core"><span>React</span><span class="tag">core</span></div>
+          <div class="skill-row core"><span>TypeScript</span><span class="tag">core</span></div>
+          <div class="skill-row core"><span>Tailwind CSS</span><span class="tag">core</span></div>
+          <div class="skill-row core"><span>HTML / CSS</span><span class="tag">core</span></div>
+          <div class="skill-row core"><span>Git &amp; GitHub</span><span class="tag">core</span></div>
+          <div class="skill-row core"><span>AI-assisted dev (Claude, Copilot)</span><span class="tag">daily</span></div>
+          <div class="skill-row learning"><span>REST APIs</span><span class="tag">learning</span></div>
+          <div class="skill-row learning"><span>Supabase (Postgres + Auth)</span><span class="tag">learning</span></div>
         </div>
-        <img <img class="photo-window-img" src="bao.png" alt="Bao Kekana" width="516" height="484">
-      </figure>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="cmd"><span class="prompt">bao@dev</span>:<span class="path">~/projects</span>$ <span class="arg">git log --stat</span></div>
+        <h2 class="sec">projects</h2>
+
+        <div class="commit">
+          <div class="commit-head">
+            <span class="hash">#a3f9c12</span>
+            <span class="commit-msg">MediDoor — healthcare house-call &amp; emergency platform</span>
+          </div>
+          <div class="commit-meta">Author: Bao Kekana · personal project</div>
+          <p class="commit-body">
+            Connects patients to doctors and nurses for home visits, plus one-tap emergency requests
+            (police, fire, ambulance). Currently a full frontend; being extended into a working app with a Supabase backend.
+          </p>
+          <div class="diffstat"><span>React</span><span>Frontend</span><span>Supabase (in progress)</span></div>
+          <div class="commit-links">
+            <a href="https://medi-door-frontend.vercel.app" target="_blank" rel="noopener">live site</a>
+          </div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-head">
+            <span class="hash">#7e21d08</span>
+            <span class="commit-msg">Project Management Dashboard</span>
+          </div>
+          <div class="commit-meta">Author: Bao Kekana · Melsoft Academy — Company Project 2</div>
+          <p class="commit-body">
+            Frontend-only dashboard for tracking projects and tasks: stats overview, search/filter, task
+            statuses from To Do through Completed, controlled forms with validation, and lazy-loaded views.
+          </p>
+          <div class="diffstat"><span>React</span><span>TypeScript</span><span>Tailwind CSS</span><span>React Router</span></div>
+          <div class="commit-links">
+            <a href="https://github.com/Bao992" target="_blank" rel="noopener">github.com/Bao992</a>
+          </div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-head">
+            <span class="hash">#c58a331</span>
+            <span class="commit-msg">BMC Toolhire — business website redesign</span>
+          </div>
+          <div class="commit-meta">Author: Bao Kekana · Melsoft Academy — Company Project 1</div>
+          <p class="commit-body">
+            Full redesign of a real Limpopo tool-and-equipment rental business's website, done with direct
+            outreach to the company — researched their needs, then rebuilt the site around them.
+          </p>
+          <div class="diffstat"><span>React</span><span>Tailwind CSS</span><span>Client project</span></div>
+          <div class="commit-links">
+            <a href="https://github.com/Bao992" target="_blank" rel="noopener">github.com/Bao992</a>
+          </div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-head">
+            <span class="hash">#019bf44</span>
+            <span class="commit-msg">WorkoutFlow — AI training plan landing page</span>
+          </div>
+          <div class="commit-meta">Author: Bao Kekana · timed technical assessment</div>
+          <p class="commit-body">
+            Landing page for an AI-generated personalised training plan app, built for endurance athletes —
+            includes a live JavaScript training calculator, built and deployed under time pressure.
+          </p>
+          <div class="diffstat"><span>HTML/CSS/JS</span><span>Timed build</span></div>
+          <div class="commit-links">
+            <a href="https://workoutflow-three.vercel.app" target="_blank" rel="noopener">live site</a>
+          </div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-head">
+            <span class="hash">#5d0c771</span>
+            <span class="commit-msg">Edu Habit Tracker</span>
+          </div>
+          <div class="commit-meta">Author: Bao Kekana · personal project</div>
+          <p class="commit-body">
+            A habit-tracking app built to reinforce study routines — practical, self-directed build outside coursework.
+          </p>
+          <div class="diffstat"><span>React</span></div>
+          <div class="commit-links">
+            <a href="https://edu-habit-tracker-xrl5.vercel.app" target="_blank" rel="noopener">live site</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section id="education">
+        <div class="cmd"><span class="prompt">bao@dev</span>:<span class="path">~</span>$ <span class="arg">cat education.txt</span></div>
+        <h2 class="sec">education &amp; training</h2>
+
+        <div class="edu-item">
+          <div class="title">BSc Computer Science &amp; Mathematics — UNISA</div>
+          <div class="sub">Final year · 336 of 360 NQF credits complete · finishing Complex Analysis &amp; Philosophy of Science</div>
+        </div>
+        <div class="edu-item">
+          <div class="title">AI Fullstack Engineering Program — Melsoft Academy</div>
+          <div class="sub">In progress, 2026</div>
+        </div>
+        <div class="edu-item">
+          <div class="title">Advanced HTML Certificate (NQF Level 5) — ZAIO Institute</div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="cmd"><span class="prompt">bao@dev</span>:<span class="path">~</span>$ <span class="arg">cat contact.txt</span></div>
+        <h2 class="sec">contact</h2>
+        <div class="contact-lines">
+          <div><span class="k">email</span><a href="mailto:bao.kekana@icloud.com">bao.kekana@icloud.com</a></div>
+          <div><span class="k">phone</span><span>069 187 4414</span></div>
+          <div><span class="k">github</span><a href="https://github.com/Bao992" target="_blank" rel="noopener">github.com/Bao992</a></div>
+          <div><span class="k">linkedin</span><a href="https://www.linkedin.com/in/bao-kekana-080a40322" target="_blank" rel="noopener">linkedin.com/in/bao-kekana</a></div>
+        </div>
+      </section>
+
+      <footer>// end of log — thanks for reading</footer>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- SKILLS -->
-  <section class="skills" id="skills">
-    <p class="section-label">skills <span class="dim">// log --oneline</span></p>
-    <div class="terminal-block" role="list">
-      <p class="term-line" role="listitem"><span class="term-tag">languages</span> HTML5 · CSS3 · JavaScript · Python · Java</p>
-      <p class="term-line" role="listitem"><span class="term-tag">fundamentals</span> data structures · algorithms · OOP · operating systems · discrete maths</p>
-      <p class="term-line" role="listitem"><span class="term-tag">tools</span> Git &amp; GitHub · VS Code · Claude AI and Chatgpt</p>
-      <p class="term-line term-learning" role="listitem"><span class="term-tag">learning now</span> SQL · TypeScript </p>
-    </div>
-  </section>
-
-  <!-- PROJECTS — signature commit-log element -->
-  <section class="projects" id="projects">
-    <p class="section-label">projects <span class="dim">// git log --stat</span></p>
-
-    <article class="commit">
-      <div class="commit-meta">
-        <span class="commit-hash">a3f9c12</span>
-        <span class="commit-date">2024</span>
-      </div>
-      <h3 class="commit-title">build: MediDoor — healthcare platform frontend</h3>
-      <ul class="commit-diff">
-        <li class="add">+ multi-page structure with consistent nav, layout and forms</li>
-        <li class="add">+ practiced building a site the way a real product needs it, not a single page</li>
-      </ul>
-      <div class="commit-stack">
-        <span>HTML</span><span>CSS</span>
-      </div>
-      <a class="commit-link" href="https://github.com/Bao992/MediDoor-Frontend" target="_blank" rel="noopener">view repo &#8594;</a>
-    </article>
-
-    <article class="commit">
-      <div class="commit-meta">
-        <span class="commit-hash">7d21e4b</span>
-        <span class="commit-date">2024</span>
-      </div>
-      <h3 class="commit-title">feat: Edu Habit Tracker — study routine app</h3>
-      <ul class="commit-diff">
-        <li class="add">+ tracks student study habits over time with real interactivity</li>
-        <li class="add">+ first project with actual state, not just static markup</li>
-      </ul>
-      <div class="commit-stack">
-        <span>HTML</span><span>CSS</span><span>JavaScript</span>
-      </div>
-      <a class="commit-link" href="https://github.com/Bao992/Edu-Habit-Tracker" target="_blank" rel="noopener">view repo &#8594;</a>
-    </article>
-
-    <article class="commit">
-      <div class="commit-meta">
-        <span class="commit-hash">c88a02f</span>
-        <span class="commit-date">2023</span>
-      </div>
-      <h3 class="commit-title">clone: Google Keep UI</h3>
-      <ul class="commit-diff">
-        <li class="add">+ rebuilt note-taking UI/UX to study a shipped product's structure</li>
-      </ul>
-      <div class="commit-stack">
-        <span>HTML</span><span>CSS</span><span>JavaScript</span>
-      </div>
-      <a class="commit-link" href="https://github.com/Bao992/Google-Keep-clone" target="_blank" rel="noopener">view repo &#8594;</a>
-    </article>
-
-    <article class="commit">
-      <div class="commit-meta">
-        <span class="commit-hash">0f41b9a</span>
-        <span class="commit-date">2023</span>
-      </div>
-      <h3 class="commit-title">clone: YouTube UI</h3>
-      <ul class="commit-diff">
-        <li class="add">+ recreated layout and styling of a media-heavy interface</li>
-      </ul>
-      <div class="commit-stack">
-        <span>HTML</span><span>CSS</span>
-      </div>
-      <a class="commit-link" href="https://github.com/Bao992/Youtube-clone" target="_blank" rel="noopener">view repo &#8594;</a>
-    </article>
-  </section>
-
-  <!-- EDUCATION -->
-  <section class="education" id="education">
-    <p class="section-label">education &amp; credentials <span class="dim">// README.md</span></p>
-    <div class="readme-card">
-      <h3>BSc Computer Science — University of South Africa (UNISA)</h3>
-      <p class="readme-status">In progress · 336/360 NQF credits completed</p>
-      <p>Majors in Computer Science and Mathematics. Distinctions in Theoretical Computer Science I,
-        Programming: Data Structures &amp; Operating Systems, Numerical Methods I &amp; II, Differential
-        Equations, and Formal Logic.</p>
-    </div>
-    <div class="readme-card">
-      <h3>Certificate of Competence — Advanced HTML (NQF Level 5)</h3>
-      <p class="readme-status">ZAIO Institute of Technology · 2025 · MICT SETA accredited</p>
-      <p>Applying advanced HTML and associated techniques to build websites for business applications.</p>
-    </div>
-    <div class="readme-card">
-      <h3>National Senior Certificate (Matric)</h3>
-      <p class="readme-status">South Africa</p>
-      <p>Met minimum requirements for admission to Bachelor's degree study.</p>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <p class="section-label">contact <span class="dim">// Phone: +27 69 187 4414 or +27 851 1240    Email:bao.kekana@icloud.com </span></p>
-    <p class="contact-line">
-      Open to junior developer, internship and learnership roles.
-    </p>
-    <div class="contact-links">
-      <a href="mailto:bao.kekana@icloud.com">bao.kekana@icloud.com</a>
-      <a href="https://github.com/Bao992" target="_blank" rel="noopener">github.com/Bao992</a>
-    </div>
-  </section>
-
-</main>
-
-<footer class="site-footer">
-  <p>Built by Bao Kekana with plain HTML, CSS and JavaScript.</p>
-</footer>
-
-<script src="script.js"></script>
 </body>
 </html>
