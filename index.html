@@ -41,6 +41,13 @@
     .command-run{border:1px solid rgba(110,231,249,.35);border-radius:8px;background:linear-gradient(110deg,var(--cyan),#a5c1ff);color:#071019;padding:10px 13px;font:600 10px var(--mono);white-space:nowrap;cursor:pointer;transition:.2s}
     .command-run:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(110,231,249,.16)}
     .command-run:disabled{opacity:.5;cursor:wait;transform:none}
+
+    .mission-inputs{display:grid;gap:7px;margin:-7px 0 18px}
+    .mission-inputs label{font:8px var(--mono);letter-spacing:.1em;color:var(--cyan)}
+    .mission-inputs label span{color:var(--soft);letter-spacing:0}
+    .mission-inputs input,.mission-inputs textarea{width:100%;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.035);color:#e5efff;padding:10px;font:11px var(--sans);resize:vertical}
+    .mission-inputs input:focus,.mission-inputs textarea:focus{outline:1px solid var(--cyan);border-color:var(--cyan)}
+    .mission-inputs p{font:8px var(--mono);color:var(--soft);margin:0}
     .command-agents{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
     .command-agent{position:relative;min-width:0;padding:14px 11px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.018);transition:border-color .25s,background .25s,transform .25s}
     .command-agent.active{border-color:rgba(110,231,249,.58);background:rgba(110,231,249,.055);transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.18)}
@@ -124,6 +131,7 @@
     .byte-ask input:focus{border-color:rgba(110,231,249,.6)}
     .byte-ask input::placeholder{color:var(--soft)}
     .byte-ask button{width:31px;border:0;border-radius:7px;background:linear-gradient(110deg,var(--cyan),#a5c1ff);color:#071019;font-weight:700;cursor:pointer}
+    .byte-ai-state{display:none;margin-top:7px;color:var(--cyan);font:8px var(--mono)}.byte-ai-state.show{display:block}
     .byte-action{margin-top:9px;color:var(--cyan)}
     .byte-demo-launch{display:block;width:100%;margin-top:8px;border:1px solid rgba(182,156,255,.35);border-radius:7px;background:linear-gradient(100deg,rgba(124,156,255,.12),rgba(182,156,255,.1));color:#d8ceff;padding:8px;text-align:left;font:9px var(--mono);cursor:pointer}
     .byte-demo-launch:hover{border-color:var(--violet);color:#fff}
@@ -223,7 +231,7 @@
           <div class="agent-row"><span class="agent-icon">03</span><span class="agent-text"><b>Verify</b><small>QUALITY & RELIABILITY</small></span><span class="agent-state">FOCUS</span></div>
         </div>
         <div class="welcome-bot" id="welcomeBot" aria-label="Byte, your BAO AI LAB portfolio guide">
-          <div class="welcome-bubble show" id="botBubble" role="status" aria-live="polite"><button class="bot-dismiss" id="botDismiss" type="button" aria-label="Dismiss Byte message">×</button><strong>BYTE · YOUR PORTFOLIO GUIDE</strong><span class="bot-message" id="botMessage">Hey there! 👋 Welcome to BAO AI LAB. I'm your guide around here. Ask me anything about Bao's work.</span><div class="byte-quick" id="byteQuick"><button type="button" data-byte-question="Who is Bao?">Who is Bao?</button><button type="button" data-byte-question="Show me the AI projects">AI projects</button><button type="button" data-byte-question="Tell me about FixFlow">What is FixFlow?</button><button type="button" data-byte-question="How can I contact Bao?">Contact Bao</button></div><form class="byte-ask" id="byteAsk"><input id="byteInput" type="text" maxlength="160" placeholder="Ask Byte a question..." aria-label="Ask Byte a question" autocomplete="off"/><button type="submit" aria-label="Send question">↗</button></form><button class="byte-action" id="byteAction" type="button" hidden>Explore this section ↗</button><button class="byte-demo-launch" id="byteDemoLaunch" type="button">✦ Watch a tiny multi-agent demo</button><div class="byte-workspace" id="byteWorkspace" aria-live="polite"><div class="byte-workspace-top"><span>BYTE'S MINI WORKSPACE</span><span>SIMULATED RUN</span></div><div class="byte-team-tag">MEET THE CREW · 03 DIGITAL COLLEAGUES</div><div class="byte-task">Task: Check a school meal plan</div><div class="byte-agent" data-agent="0"><span class="byte-agent-icon"><svg class="byte-avatar" viewBox="0 0 48 48" role="img" aria-label="Thabo avatar"><path d="M8 40Q9 29 19 28H29Q39 29 40 40" fill="#3b7591" stroke="#8eeeff" stroke-width="1.5"/><g class="avatar-head"><rect x="11" y="6" width="26" height="25" rx="9" fill="#d6e8f2" stroke="#8eeeff" stroke-width="1.5"/><rect x="15" y="12" width="18" height="11" rx="4" fill="#102b3c"/><g class="avatar-eyes" fill="#8eeeff"><circle cx="20" cy="17" r="2"/><circle cx="28" cy="17" r="2"/></g><path d="M20 26H28" stroke="#52748a" stroke-width="1.5" stroke-linecap="round"/></g><path d="M35 8L40 8L40 14" fill="none" stroke="#8eeeff" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="byte-agent-copy"><b>Thabo · Planner</b><small>Calm, organised &amp; strategic</small></span><span class="byte-agent-state">QUEUED</span></div><div class="byte-agent" data-agent="1"><span class="byte-agent-icon"><svg class="byte-avatar" viewBox="0 0 48 48" role="img" aria-label="Lerato avatar"><path d="M8 40Q9 29 19 28H29Q39 29 40 40" fill="#7057a4" stroke="#d3bfff" stroke-width="1.5"/><g class="avatar-head"><path d="M10 17Q10 5 24 5Q38 5 38 18V25H10Z" fill="#c9b8eb" stroke="#d3bfff" stroke-width="1.5"/><rect x="13" y="13" width="22" height="17" rx="8" fill="#241b3c"/><g class="avatar-eyes" fill="#d3bfff"><circle cx="20" cy="20" r="2"/><circle cx="28" cy="20" r="2"/></g><path d="M20 26Q24 29 28 26" fill="none" stroke="#d3bfff" stroke-width="1.5" stroke-linecap="round"/></g><path d="M36 7L38 3M40 11L44 10" stroke="#d3bfff" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="byte-agent-copy"><b>Lerato · Nutrition Analyst</b><small>Curious, sharp &amp; detail-focused</small></span><span class="byte-agent-state">QUEUED</span></div><div class="byte-agent" data-agent="2"><span class="byte-agent-icon"><svg class="byte-avatar" viewBox="0 0 48 48" role="img" aria-label="Kabelo avatar"><path d="M8 40Q9 29 19 28H29Q39 29 40 40" fill="#36795d" stroke="#9af0c3" stroke-width="1.5"/><g class="avatar-head"><path d="M24 5L38 11V21Q37 31 24 36Q11 31 10 21V11Z" fill="#c8e9d8" stroke="#9af0c3" stroke-width="1.5"/><path d="M14 14H34V24Q33 29 24 32Q15 29 14 24Z" fill="#14382b"/><g class="avatar-eyes" fill="#9af0c3"><circle cx="20" cy="21" r="2"/><circle cx="28" cy="21" r="2"/></g><path d="M19 27L23 30L30 24" fill="none" stroke="#9af0c3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></g></svg></span><span class="byte-agent-copy"><b>Kabelo · Verifier</b><small>Careful, steady &amp; thorough</small></span><span class="byte-agent-state">QUEUED</span></div><div class="byte-agent-workspace" id="byteAgentWorkspace"><div class="byte-agent-workspace-top"><span id="byteWorkspaceTitle">THABO'S PLANNING DESK</span><span id="byteWorkspacePhase">STANDBY</span></div><p id="byteWorkspaceTask">Break the meal-plan request into clear checks and assign the next step.</p><div class="workspace-signal"><span id="byteWorkspaceSignal"></span></div></div><div class="byte-progress"><span id="byteProgress"></span></div><p class="byte-agent-quote" id="byteAgentQuote">Thabo: “Let me map this out before we begin.”</p><p class="byte-demo-note" id="byteDemoNote">Ready when you are. Watch the team hand work from one colleague to the next.</p></div></div>
+          <div class="welcome-bubble show" id="botBubble" role="status" aria-live="polite"><button class="bot-dismiss" id="botDismiss" type="button" aria-label="Dismiss Byte message">×</button><strong>BYTE · YOUR PORTFOLIO GUIDE</strong><span class="bot-message" id="botMessage">Hey there! 👋 Welcome to BAO AI LAB. I'm your guide around here. Ask me anything about Bao's work.</span><div class="byte-quick" id="byteQuick"><button type="button" data-byte-question="Who is Bao?">Who is Bao?</button><button type="button" data-byte-question="Show me the AI projects">AI projects</button><button type="button" data-byte-question="Tell me about FixFlow">What is FixFlow?</button><button type="button" data-byte-question="How can I contact Bao?">Contact Bao</button></div><form class="byte-ask" id="byteAsk"><input id="byteInput" type="text" maxlength="160" placeholder="Ask Byte a question..." aria-label="Ask Byte a question" autocomplete="off"/><button type="submit" aria-label="Send question">↗</button></form><button class="byte-action" id="byteAction" type="button" hidden>Explore this section ↗</button><div class="byte-ai-state" id="byteAiState" role="status" aria-live="polite"></div><button class="byte-demo-launch" id="byteDemoLaunch" type="button">✦ Watch a tiny multi-agent demo</button><div class="byte-workspace" id="byteWorkspace" aria-live="polite"><div class="byte-workspace-top"><span>BYTE'S MINI WORKSPACE</span><span>SIMULATED RUN</span></div><div class="byte-team-tag">MEET THE CREW · 03 DIGITAL COLLEAGUES</div><div class="byte-task">Task: Check a school meal plan</div><div class="byte-agent" data-agent="0"><span class="byte-agent-icon"><svg class="byte-avatar" viewBox="0 0 48 48" role="img" aria-label="Thabo avatar"><path d="M8 40Q9 29 19 28H29Q39 29 40 40" fill="#3b7591" stroke="#8eeeff" stroke-width="1.5"/><g class="avatar-head"><rect x="11" y="6" width="26" height="25" rx="9" fill="#d6e8f2" stroke="#8eeeff" stroke-width="1.5"/><rect x="15" y="12" width="18" height="11" rx="4" fill="#102b3c"/><g class="avatar-eyes" fill="#8eeeff"><circle cx="20" cy="17" r="2"/><circle cx="28" cy="17" r="2"/></g><path d="M20 26H28" stroke="#52748a" stroke-width="1.5" stroke-linecap="round"/></g><path d="M35 8L40 8L40 14" fill="none" stroke="#8eeeff" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="byte-agent-copy"><b>Thabo · Planner</b><small>Calm, organised &amp; strategic</small></span><span class="byte-agent-state">QUEUED</span></div><div class="byte-agent" data-agent="1"><span class="byte-agent-icon"><svg class="byte-avatar" viewBox="0 0 48 48" role="img" aria-label="Lerato avatar"><path d="M8 40Q9 29 19 28H29Q39 29 40 40" fill="#7057a4" stroke="#d3bfff" stroke-width="1.5"/><g class="avatar-head"><path d="M10 17Q10 5 24 5Q38 5 38 18V25H10Z" fill="#c9b8eb" stroke="#d3bfff" stroke-width="1.5"/><rect x="13" y="13" width="22" height="17" rx="8" fill="#241b3c"/><g class="avatar-eyes" fill="#d3bfff"><circle cx="20" cy="20" r="2"/><circle cx="28" cy="20" r="2"/></g><path d="M20 26Q24 29 28 26" fill="none" stroke="#d3bfff" stroke-width="1.5" stroke-linecap="round"/></g><path d="M36 7L38 3M40 11L44 10" stroke="#d3bfff" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="byte-agent-copy"><b>Lerato · Nutrition Analyst</b><small>Curious, sharp &amp; detail-focused</small></span><span class="byte-agent-state">QUEUED</span></div><div class="byte-agent" data-agent="2"><span class="byte-agent-icon"><svg class="byte-avatar" viewBox="0 0 48 48" role="img" aria-label="Kabelo avatar"><path d="M8 40Q9 29 19 28H29Q39 29 40 40" fill="#36795d" stroke="#9af0c3" stroke-width="1.5"/><g class="avatar-head"><path d="M24 5L38 11V21Q37 31 24 36Q11 31 10 21V11Z" fill="#c8e9d8" stroke="#9af0c3" stroke-width="1.5"/><path d="M14 14H34V24Q33 29 24 32Q15 29 14 24Z" fill="#14382b"/><g class="avatar-eyes" fill="#9af0c3"><circle cx="20" cy="21" r="2"/><circle cx="28" cy="21" r="2"/></g><path d="M19 27L23 30L30 24" fill="none" stroke="#9af0c3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></g></svg></span><span class="byte-agent-copy"><b>Kabelo · Verifier</b><small>Careful, steady &amp; thorough</small></span><span class="byte-agent-state">QUEUED</span></div><div class="byte-agent-workspace" id="byteAgentWorkspace"><div class="byte-agent-workspace-top"><span id="byteWorkspaceTitle">THABO'S PLANNING DESK</span><span id="byteWorkspacePhase">STANDBY</span></div><p id="byteWorkspaceTask">Break the meal-plan request into clear checks and assign the next step.</p><div class="workspace-signal"><span id="byteWorkspaceSignal"></span></div></div><div class="byte-progress"><span id="byteProgress"></span></div><p class="byte-agent-quote" id="byteAgentQuote">Thabo: “Let me map this out before we begin.”</p><p class="byte-demo-note" id="byteDemoNote">Ready when you are. Watch the team hand work from one colleague to the next.</p></div></div>
           <div class="handover-card" id="handoverCard" aria-hidden="true"><span class="handover-icon" id="handoverIcon">↗</span><span class="handover-copy"><b id="handoverTitle">Your next stop</b><small id="handoverSub">OPENING LINK</small></span></div>
           <button class="bot-toggle" id="botToggle" type="button" aria-label="Ask Byte for a tour" aria-expanded="true"><svg class="robot-mascot waving" id="robotMascot" viewBox="0 0 140 160" role="img" aria-label="Byte, a friendly robot waving hello">
             <defs><linearGradient id="botShell" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e4f5ff"/><stop offset=".5" stop-color="#8fa9c9"/><stop offset="1" stop-color="#425675"/></linearGradient><linearGradient id="botFace" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14283e"/><stop offset="1" stop-color="#091522"/></linearGradient><linearGradient id="botGlow"><stop stop-color="#8df4ff"/><stop offset="1" stop-color="#789dff"/></linearGradient></defs>
@@ -312,7 +320,8 @@
         <div class="command-main">
           <div class="command-team">
             <div class="command-section-label">Active mission / 001</div>
-            <div class="command-mission"><div><h3>School meal-plan review</h3><p>Coordinate a three-agent workflow to identify a possible meal-item shortage and prepare it for human review.</p></div><button class="command-run" id="commandRun" type="button">▶ Run mission</button></div>
+            <div class="command-mission"><div><h3>Launch a team mission</h3><p>Give Byte a task. Thabo will plan it, Lerato will analyse the supplied information, and Kabelo will verify their work.</p></div><button class="command-run" id="commandRun" type="button">▶ Run mission</button></div>
+            <div class="mission-inputs"><label for="missionTask">MISSION TASK</label><input id="missionTask" maxlength="700" value="Review a school meal plan and identify any gaps."/><label for="missionContext">SUPPORTING INFORMATION <span>(optional)</span></label><textarea id="missionContext" rows="3" maxlength="1800" placeholder="Paste meal quantities, observations, project requirements or other evidence for the agents to analyse…"></textarea><p>Agents only analyse the information you provide. They do not browse the web or access external systems.</p></div>
             <div class="command-agents">
               <button class="command-agent selected" type="button" data-agent="0" aria-pressed="true"><div class="command-avatar">TH</div><h4>Thabo</h4><span class="role">PLANNER · STRATEGY</span><span class="agent-status">STANDBY</span><p class="agent-task">Waiting to break the request into clear checks.</p></button>
               <button class="command-agent" type="button" data-agent="1" aria-pressed="false"><div class="command-avatar">LE</div><h4>Lerato</h4><span class="role">NUTRITION ANALYST</span><span class="agent-status">STANDBY</span><p class="agent-task">Waiting to compare quantities and identify gaps.</p></button>
@@ -326,7 +335,7 @@
                 <div class="agent-detail-cell"><h5>Task history</h5><div class="agent-history" id="agentHistory"><span>• No mission activity yet</span></div></div>
                 <div class="agent-detail-cell"><h5>Current assignment</h5><p id="agentAssignment">Waiting to receive a mission from Byte.</p></div>
               </div>
-              <div class="agent-chat"><div class="agent-chat-title">Communication channel</div><div class="agent-chat-log" id="agentChatLog"><div class="agent-chat-message"><b>Byte → Thabo:</b> Stand by for the next assignment.</div></div><form class="agent-chat-form" id="agentChatForm"><input id="agentChatInput" maxlength="120" placeholder="Write a note to this agent…" aria-label="Write a note to the selected agent"/><button type="submit">SEND ↗</button></form><div class="agent-chat-note">LOCAL DEMO CHANNEL · NOTES ARE DISPLAYED, NOT SENT TO A LIVE AI AGENT</div></div>
+              <div class="agent-chat"><div class="agent-chat-title">Communication channel</div><div class="agent-chat-log" id="agentChatLog"><div class="agent-chat-message"><b>Byte → Thabo:</b> Stand by for the next assignment.</div></div><form class="agent-chat-form" id="agentChatForm"><input id="agentChatInput" maxlength="120" placeholder="Write a note to this agent…" aria-label="Write a note to the selected agent"/><button type="submit">SEND ↗</button></form><div class="agent-chat-note">LOCAL WORKSPACE NOTES · MISSION OUTPUTS ARE GENERATED BY GEMINI</div></div>
             </div>
           </div>
           <aside class="command-side">
@@ -334,7 +343,7 @@
             <div class="command-side-block"><div class="command-section-label">Mission outcome</div><div class="command-outcome"><strong id="commandOutcomeTitle">AWAITING EXECUTION</strong><p id="commandOutcome">The team will prepare a structured review and flag any potential issue for a human decision.</p></div></div>
           </aside>
         </div>
-        <div class="command-foot"><span>MISSION CONTROL · HUMAN OVERSIGHT ENABLED</span><span>SIMULATED WORKFLOW / DEMO MODE</span></div>
+        <div class="command-foot"><span>MISSION CONTROL · HUMAN OVERSIGHT ENABLED</span><span>LIVE GEMINI API · HUMAN REVIEW REQUIRED</span></div>
       </div>
     </div></section>
 
@@ -382,6 +391,7 @@
     const byteAgentWorkspace=document.getElementById('byteAgentWorkspace'),byteWorkspaceTitle=document.getElementById('byteWorkspaceTitle'),byteWorkspacePhase=document.getElementById('byteWorkspacePhase'),byteWorkspaceTask=document.getElementById('byteWorkspaceTask'),byteWorkspaceSignal=document.getElementById('byteWorkspaceSignal');
 
     let botTimer,botHidden=false,currentSection='top',byteDestination='',byteDemoTimer;
+    const byteAiState=document.getElementById('byteAiState');
     let botActionLabel='';
 
     const byteMessages={
@@ -415,10 +425,21 @@
       showByte(match?match.message:"Good question! I'm still learning my tour guide duties. Try asking about Bao, his projects, skills, AI interests or how to contact him.",false);
       bot.classList.remove('handing');bot.classList.add('waving');
     }
-    function askByte(question){
+    async function askByte(question){
       const clean=question.trim();if(!clean)return;
-      botHidden=false;bot.classList.remove('thinking','excited');bot.classList.add('excited');
-      answerByte(clean);byteInput.value='';
+      botHidden=false;clearTimeout(botTimer);bot.classList.remove('thinking','excited');bot.classList.add('thinking');
+      byteDestination='';botActionLabel='';byteAction.hidden=true;byteAiState.textContent='BYTE IS THINKING…';byteAiState.classList.add('show');
+      byteInput.value='';const send=byteAsk.querySelector('button[type="submit"]');send.disabled=true;
+      try{
+        const response=await fetch('/api/agent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:clean})});
+        const data=await response.json().catch(()=>({}));
+        if(!response.ok)throw new Error(data.error||'Byte could not answer just now.');
+        botMessage.textContent=data.reply;bot.classList.remove('thinking');bot.classList.add('excited');bubble.classList.add('show');botToggle.setAttribute('aria-expanded','true');
+        byteAiState.textContent='LIVE AI · '+(data.model||'GEMINI');byteAiState.classList.add('show');
+      }catch(error){
+        bot.classList.remove('thinking');botMessage.textContent=error.message||'Byte could not connect. Please try again.';
+        bubble.classList.add('show');botToggle.setAttribute('aria-expanded','true');byteAiState.textContent='AI CONNECTION STATUS';byteAiState.classList.add('show');
+      }finally{send.disabled=false}
     }
     const demoSteps=[
       {name:'Thabo · Planner',note:'The task is split into checking the menu, comparing portions, and flagging missing items.',quote:'Thabo: “Let me map this out. First, we need a clear plan.”',state:'PLANNING',desk:"THABO'S PLANNING DESK",phase:'MAPPING TASK',task:'Breaking the meal-plan request into clear checks and assigning the next step.',progress:'100%'},
@@ -501,29 +522,50 @@
       commandOutcome.textContent='The team will prepare a structured review and flag any potential issue for a human decision.';
       commandRun.disabled=false;commandRun.textContent='▶ Run mission';
     }
-    function runCommandMission(){
-      resetCommand();commandRun.disabled=true;commandRun.textContent='MISSION RUNNING…';
-      commandActivity.innerHTML='';addCommandEvent('<b>Byte:</b> Mission accepted. Assigning the first task to Thabo.',true);
-      commandOutcomeTitle.textContent='WORKFLOW IN PROGRESS';
-      commandOutcome.textContent='The crew is working through the task in sequence.';
-      let index=0;
-      function next(){
-        if(index>0){const previous=commandAgents[index-1];previous.classList.remove('active');previous.classList.add('done');previous.querySelector('.agent-status').textContent='COMPLETE';if(selectedAgent===index-1)renderAgentWorkspace(index-1)}
-        if(index===commandSteps.length){
-          addCommandEvent('<b>Byte:</b> All handoffs complete. A person should review the flagged item before any decision is made.');
-          commandOutcomeTitle.textContent='READY FOR HUMAN REVIEW';
-          commandOutcome.textContent='The scripted workflow identified a potential meal-item shortage and prepared it for human review. No real data was analysed.';
-          commandRun.disabled=false;commandRun.textContent='↻ Run again';commandTimer=null;return;
-        }
-        const step=commandSteps[index],agent=commandAgents[step.agent];
-        agent.classList.add('active');agent.querySelector('.agent-status').textContent=step.status;
-        agent.querySelector('.agent-task').textContent=step.task;
-        const profile=agentProfiles[step.agent];profile.history.push(step.history);profile.assignment=step.assignment;profile.messages.push('Byte → '+profile.name.split(' · ')[0]+': '+step.task);if(selectedAgent===step.agent)renderAgentWorkspace(step.agent);
-        addCommandEvent(step.event,true);commandOutcomeTitle.textContent=step.outcome;
-        commandOutcome.textContent=step.task;
-        index++;commandTimer=setTimeout(next,1900);
+    const missionTask=document.getElementById('missionTask'),missionContext=document.getElementById('missionContext');
+    function addCommandTextEvent(label,message,current=false){
+      const item=document.createElement('div');item.className='command-event'+(current?' current':'');
+      const dot=document.createElement('span');dot.className='command-event-dot';
+      const p=document.createElement('p');const b=document.createElement('b');b.textContent=label+': ';p.append(b,document.createTextNode(message));
+      item.append(dot,p);commandActivity.append(item);
+    }
+    async function runCommandMission(){
+      const task=missionTask.value.trim(),context=missionContext.value.trim();
+      if(!task){missionTask.focus();commandOutcomeTitle.textContent='TASK REQUIRED';commandOutcome.textContent='Enter a task for the team before starting the mission.';return}
+      clearTimeout(commandTimer);commandTimer=null;commandRun.disabled=true;commandRun.textContent='MISSION RUNNING…';
+      commandAgents.forEach((agent,i)=>{agent.classList.remove('active','done');agent.querySelector('.agent-status').textContent='QUEUED';agent.querySelector('.agent-task').textContent=['Waiting for Thabo to plan the task.','Waiting for Lerato to analyse the evidence.','Waiting for Kabelo to verify the findings.'][i]});
+      agentProfiles.forEach((profile,i)=>{profile.history=[];profile.assignment=['Preparing the task plan…','Waiting for Thabo’s plan…','Waiting for Lerato’s analysis…'][i];profile.messages=[]});
+      commandActivity.innerHTML='';addCommandTextEvent('Byte','Mission accepted. Assigning the task to Thabo.',true);
+      commandOutcomeTitle.textContent='CONNECTING TO GEMINI';
+      commandOutcome.textContent='Three specialised AI calls will run in sequence. This can take a little time.';
+      const phases=[
+        {status:'PLANNING',task:'Thabo is preparing a structured plan…'},
+        {status:'ANALYSING',task:'Lerato is analysing the supplied evidence…'},
+        {status:'VERIFYING',task:'Kabelo is checking the plan and analysis…'}
+      ];
+      try{
+        const response=await fetch('/api/mission',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task,context})});
+        const data=await response.json().catch(()=>({}));
+        if(!response.ok)throw new Error(data.error||'The agent team could not complete this mission.');
+        data.steps.forEach((step,index)=>{
+          const card=commandAgents[index],profile=agentProfiles[index];
+          card.classList.remove('active');card.classList.add('done');card.querySelector('.agent-status').textContent='COMPLETE';
+          card.querySelector('.agent-task').textContent=step.result;
+          profile.assignment=step.result;profile.history.push(step.status+' · '+new Date().toLocaleTimeString());
+          profile.messages.push('Byte → '+step.agent+': Assignment completed.');profile.messages.push(step.agent+' → Byte: '+step.result);
+          addCommandTextEvent(step.agent,step.result);
+          renderAgentWorkspace(index);
+        });
+        commandOutcomeTitle.textContent='READY FOR HUMAN REVIEW';
+        commandOutcome.textContent='All three AI agents completed their individual steps. Review the findings and supporting evidence yourself before acting. The agents have not executed external actions.';
+        addCommandTextEvent('Byte','Mission complete. Human review is required before any decision or action.');
+      }catch(error){
+        commandOutcomeTitle.textContent='MISSION INTERRUPTED';
+        commandOutcome.textContent=error.message||'The team encountered an error. Check the AI configuration and try again.';
+        addCommandTextEvent('Byte',commandOutcome.textContent,true);
+      }finally{
+        commandRun.disabled=false;commandRun.textContent='↻ Run mission';
       }
-      commandTimer=setTimeout(next,450);
     }
     commandRun.addEventListener('click',runCommandMission);
 
