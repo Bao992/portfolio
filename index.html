@@ -25,7 +25,56 @@
     section{padding:82px 0;border-top:1px solid var(--line)}.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:36px}.section-head h2{font:600 clamp(30px,4vw,43px)/1.1 var(--display);letter-spacing:-.04em;margin:9px 0 0}.section-intro{max-width:460px;color:var(--muted);font-size:14px;margin:0}
     .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:50px}.about-copy p{color:var(--muted);font-size:15px;line-height:1.9;margin:0 0 16px}.about-copy strong{color:var(--text)}.principles{display:grid;gap:12px}.principle{padding:17px;border:1px solid var(--line);border-radius:12px;background:rgba(16,22,34,.58)}.principle .num{font:11px var(--mono);color:var(--cyan)}.principle h3{font:600 15px var(--display);margin:7px 0 3px}.principle p{font-size:12px;color:var(--muted);margin:0}
     .project-tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}.filter{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:7px 13px;font:11px var(--mono);cursor:pointer}.filter.active,.filter:hover{color:var(--cyan);border-color:rgba(110,231,249,.4);background:rgba(110,231,249,.06)}.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.project{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:linear-gradient(145deg,rgba(18,26,40,.85),rgba(12,17,27,.92));transition:.25s;display:flex;flex-direction:column}.project:hover{transform:translateY(-4px);border-color:rgba(110,231,249,.34);box-shadow:0 18px 48px rgba(0,0,0,.2)}.project[hidden]{display:none}.project-art{height:150px;position:relative;overflow:hidden;background:radial-gradient(circle at 72% 34%,rgba(110,231,249,.2),transparent 30%),linear-gradient(135deg,#111c31,#15152b)}.project-art:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:24px 24px;mask-image:linear-gradient(black,transparent)}.art-code{position:absolute;left:22px;top:24px;font:11px/1.8 var(--mono);color:#a8bad7}.art-code span{color:var(--cyan)}.art-orbit{position:absolute;width:150px;height:90px;border:1px solid rgba(110,231,249,.55);border-radius:50%;right:25px;top:30px;transform:rotate(-28deg);box-shadow:0 0 35px rgba(110,231,249,.12)}.art-orbit:after{content:"";position:absolute;inset:14px -12px;border:1px solid rgba(182,156,255,.45);border-radius:50%;transform:rotate(58deg)}.art-panel{position:absolute;right:34px;top:35px;width:120px;height:78px;border:1px solid rgba(160,183,231,.35);border-radius:8px;background:rgba(7,13,24,.68);padding:10px}.art-panel i{display:block;height:4px;border-radius:4px;background:rgba(110,231,249,.6);margin:5px 0;width:70%}.art-panel i:nth-child(2){width:90%;background:rgba(182,156,255,.5)}.art-panel i:nth-child(3){width:52%}.project-body{padding:20px;display:flex;flex-direction:column;flex:1}.project-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.project-type{font:10px var(--mono);color:var(--cyan);text-transform:uppercase;letter-spacing:.1em}.status{font:9px var(--mono);padding:4px 7px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}.project h3{font:600 20px var(--display);margin:11px 0 7px}.project p{font-size:13px;color:var(--muted);line-height:1.75;margin:0 0 16px}.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}.tags span{font:9px var(--mono);padding:5px 7px;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:5px;color:#b6c4da}.project-links{display:flex;gap:16px;margin-top:17px;font:11px var(--mono)}.project-links a{color:var(--cyan)}.project-links a:hover{text-decoration:underline}.project-links a.secondary{color:var(--muted)}
-    .agentic{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;align-items:stretch}.agent-panel{border:1px solid rgba(124,156,255,.22);border-radius:16px;padding:24px;background:radial-gradient(circle at 100% 0,rgba(124,156,255,.12),transparent 40%),rgba(16,22,34,.72)}.agent-panel h3{font:600 22px var(--display);margin:12px 0}.agent-panel p{font-size:13px;color:var(--muted);line-height:1.8}.agent-list{display:grid;gap:10px}.agent-step{display:flex;gap:15px;padding:17px;border:1px solid var(--line);border-radius:12px;background:rgba(16,22,34,.52)}.agent-step .step{font:12px var(--mono);color:var(--cyan);padding-top:2px}.agent-step h4{font:600 14px var(--display);margin:0 0 4px}.agent-step p{font-size:12px;color:var(--muted);margin:0}
+    .agentic{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;align-items:stretch}
+    .command-shell{border:1px solid rgba(110,231,249,.2);border-radius:18px;background:linear-gradient(145deg,rgba(15,24,39,.94),rgba(9,15,26,.96));overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.22)}
+    .command-topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:16px 20px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.018)}
+    .command-brand{display:flex;align-items:center;gap:10px;font:11px var(--mono);letter-spacing:.1em;color:#d8e7fb}
+    .command-brand-mark{width:28px;height:28px;display:grid;place-items:center;border:1px solid rgba(110,231,249,.35);border-radius:8px;color:var(--cyan);background:rgba(110,231,249,.08)}
+    .command-live{font:9px var(--mono);color:var(--green);display:flex;align-items:center;gap:7px}
+    .command-live:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+    .command-main{display:grid;grid-template-columns:1.45fr .75fr;gap:0}
+    .command-team{padding:22px;border-right:1px solid var(--line)}
+    .command-section-label{font:9px var(--mono);letter-spacing:.13em;color:var(--soft);text-transform:uppercase}
+    .command-mission{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin:9px 0 20px}
+    .command-mission h3{font:600 21px var(--display);margin:0 0 5px}
+    .command-mission p{font-size:11px;color:var(--muted);margin:0;max-width:420px}
+    .command-run{border:1px solid rgba(110,231,249,.35);border-radius:8px;background:linear-gradient(110deg,var(--cyan),#a5c1ff);color:#071019;padding:10px 13px;font:600 10px var(--mono);white-space:nowrap;cursor:pointer;transition:.2s}
+    .command-run:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(110,231,249,.16)}
+    .command-run:disabled{opacity:.5;cursor:wait;transform:none}
+    .command-agents{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .command-agent{position:relative;min-width:0;padding:14px 11px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.018);transition:border-color .25s,background .25s,transform .25s}
+    .command-agent.active{border-color:rgba(110,231,249,.58);background:rgba(110,231,249,.055);transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.18)}
+    .command-agent.done{border-color:rgba(140,232,189,.35)}
+    .command-avatar{width:54px;height:54px;display:grid;place-items:center;border-radius:15px;margin-bottom:12px;font:600 17px var(--display);position:relative;isolation:isolate}
+    .command-avatar:before{content:"";position:absolute;inset:-5px;border:1px solid currentColor;border-radius:18px;opacity:.2;z-index:-1;animation:command-orbit 8s linear infinite}
+    .command-agent[data-agent="0"] .command-avatar{background:linear-gradient(145deg,rgba(110,231,249,.22),rgba(48,103,145,.18));color:#8eeeff}
+    .command-agent[data-agent="1"] .command-avatar{background:linear-gradient(145deg,rgba(182,156,255,.22),rgba(91,65,145,.2));color:#d3bfff}
+    .command-agent[data-agent="2"] .command-avatar{background:linear-gradient(145deg,rgba(140,232,189,.2),rgba(45,118,91,.18));color:#9af0c3}
+    .command-agent.active .command-avatar{animation:command-pulse .9s ease-in-out infinite alternate}
+    .command-agent h4{font:600 13px var(--display);margin:0 0 2px}
+    .command-agent .role{font:8px var(--mono);color:var(--soft);display:block;min-height:24px}
+    .command-agent .agent-status{display:inline-flex;margin-top:10px;padding:4px 6px;border-radius:5px;background:rgba(255,255,255,.045);font:8px var(--mono);color:var(--muted)}
+    .command-agent.active .agent-status{color:var(--cyan);background:rgba(110,231,249,.09)}
+    .command-agent.done .agent-status{color:var(--green);background:rgba(140,232,189,.08)}
+    .command-agent .agent-task{font-size:9px;color:#b7c5d9;line-height:1.5;margin:10px 0 0;min-height:40px}
+    .command-side{padding:22px;background:rgba(255,255,255,.012)}
+    .command-side-block+.command-side-block{margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+    .command-activity{display:grid;gap:12px;margin-top:13px}
+    .command-event{display:grid;grid-template-columns:8px 1fr;gap:9px;align-items:start}
+    .command-event-dot{width:7px;height:7px;margin-top:5px;border-radius:50%;background:var(--soft)}
+    .command-event.current .command-event-dot{background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+    .command-event p{font-size:10px;line-height:1.5;color:var(--muted);margin:0}
+    .command-event b{color:#e5efff;font-weight:600}
+    .command-outcome{margin-top:12px;padding:12px;border:1px solid rgba(140,232,189,.2);border-radius:9px;background:rgba(140,232,189,.045)}
+    .command-outcome strong{display:block;color:var(--green);font:9px var(--mono);letter-spacing:.08em;margin-bottom:5px}
+    .command-outcome p{font-size:10px;line-height:1.55;color:#c1d3ce;margin:0}
+    .command-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 20px;border-top:1px solid var(--line);font:9px var(--mono);color:var(--soft)}
+    .command-foot span:last-child{color:#c6b7ff}
+    @keyframes command-pulse{to{transform:translateY(-3px) scale(1.04);filter:drop-shadow(0 0 9px currentColor)}}
+    @keyframes command-orbit{to{transform:rotate(360deg)}}
+    @media(max-width:850px){.command-main{grid-template-columns:1fr}.command-team{border-right:0;border-bottom:1px solid var(--line)}}
+    @media(max-width:560px){.command-topbar,.command-foot{padding:13px}.command-team,.command-side{padding:16px}.command-mission{flex-direction:column}.command-agents{grid-template-columns:1fr}.command-agent{display:grid;grid-template-columns:54px 1fr;column-gap:12px;align-items:center;padding:11px}.command-avatar{grid-row:span 3;margin:0}.command-agent .role{min-height:0}.command-agent .agent-status{justify-self:start;margin-top:5px}.command-agent .agent-task{grid-column:2;margin:2px 0 0;min-height:0}}
+.agent-panel{border:1px solid rgba(124,156,255,.22);border-radius:16px;padding:24px;background:radial-gradient(circle at 100% 0,rgba(124,156,255,.12),transparent 40%),rgba(16,22,34,.72)}.agent-panel h3{font:600 22px var(--display);margin:12px 0}.agent-panel p{font-size:13px;color:var(--muted);line-height:1.8}.agent-list{display:grid;gap:10px}.agent-step{display:flex;gap:15px;padding:17px;border:1px solid var(--line);border-radius:12px;background:rgba(16,22,34,.52)}.agent-step .step{font:12px var(--mono);color:var(--cyan);padding-top:2px}.agent-step h4{font:600 14px var(--display);margin:0 0 4px}.agent-step p{font-size:12px;color:var(--muted);margin:0}
     .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.skill-card{padding:20px;border:1px solid var(--line);border-radius:12px;background:rgba(16,22,34,.55)}.skill-card h3{font:600 14px var(--display);margin:0 0 13px}.skill-card p{font-size:12px;line-height:1.9;color:var(--muted);margin:0}.learning-note{font:10px var(--mono);color:#d5bdff;margin-top:12px}
     .timeline{display:grid;grid-template-columns:1fr 1fr;gap:15px}.timeline-item{padding:20px;border:1px solid var(--line);border-radius:12px;background:rgba(16,22,34,.5)}.timeline-item .date{font:10px var(--mono);color:var(--cyan)}.timeline-item h3{font:600 16px var(--display);margin:8px 0 4px}.timeline-item p{font-size:12px;color:var(--muted);margin:0}
     .contact-box{border:1px solid rgba(110,231,249,.24);border-radius:18px;padding:clamp(25px,5vw,48px);background:radial-gradient(circle at 90% 10%,rgba(124,156,255,.13),transparent 35%),linear-gradient(135deg,rgba(16,28,43,.9),rgba(12,17,27,.95));display:flex;justify-content:space-between;align-items:center;gap:28px}.contact-box h2{font:600 clamp(30px,4vw,44px)/1.1 var(--display);letter-spacing:-.04em;margin:10px 0}.contact-box p{color:var(--muted);font-size:14px;max-width:530px;margin:0}.contact-actions{display:flex;flex-direction:column;gap:10px;min-width:165px}.footer{padding:28px 0 40px;display:flex;justify-content:space-between;gap:20px;color:var(--soft);font:10px var(--mono)}.footer a{color:var(--muted)}.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.reveal.visible{opacity:1;transform:none}
@@ -116,7 +165,7 @@
   <div class="nav-wrap"><nav class="container">
     <a class="brand" href="#top" aria-label="Bao Kekana home"><span class="brand-mark"><span>BK</span></span><span>BAO<span style="color:var(--cyan)">.</span>LAB</span></a>
     <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-    <div class="nav-links" id="navLinks"><a href="#about">About</a><a href="#work">Selected work</a><a href="#agentic">Agentic AI</a><a href="#skills">Capabilities</a><a href="#contact" class="nav-cta">Let's connect ↗</a></div>
+    <div class="nav-links" id="navLinks"><a href="#about">About</a><a href="#work">Selected work</a><a href="#agentic">Agentic AI</a><a href="#command-centre">Command centre</a><a href="#skills">Capabilities</a><a href="#contact" class="nav-cta">Let's connect ↗</a></div>
   </nav></div>
 
   <main id="top">
@@ -221,6 +270,29 @@
           <article class="agent-step"><span class="step">03</span><div><h4>Coordinate workflows</h4><p>Understand how specialised agents can collaborate, hand off work, and contribute to a shared outcome.</p></div></article>
           <article class="agent-step"><span class="step">04</span><div><h4>Evaluate & verify</h4><p>Keep human judgement in the loop and check whether generated findings and actions are reliable.</p></div></article>
         </div>
+      </div>
+    </div></section>
+
+    <section id="command-centre"><div class="container reveal">
+      <div class="section-head"><div><div class="eyebrow">04 / BAO AI LAB operations</div><h2>Inside the command centre.<br/><span class="gradient">One team. One mission.</span></h2></div><p class="section-intro">Meet Byte's digital colleagues, see how responsibilities are shared, and watch a task move through planning, analysis, and verification.</p></div>
+      <div class="command-shell">
+        <div class="command-topbar"><div class="command-brand"><span class="command-brand-mark">✦</span><span>BYTE / TEAM OPERATIONS</span></div><span class="command-live">SYSTEM READY</span></div>
+        <div class="command-main">
+          <div class="command-team">
+            <div class="command-section-label">Active mission / 001</div>
+            <div class="command-mission"><div><h3>School meal-plan review</h3><p>Coordinate a three-agent workflow to identify a possible meal-item shortage and prepare it for human review.</p></div><button class="command-run" id="commandRun" type="button">▶ Run mission</button></div>
+            <div class="command-agents">
+              <article class="command-agent" data-agent="0"><div class="command-avatar">TH</div><h4>Thabo</h4><span class="role">PLANNER · STRATEGY</span><span class="agent-status">STANDBY</span><p class="agent-task">Waiting to break the request into clear checks.</p></article>
+              <article class="command-agent" data-agent="1"><div class="command-avatar">LE</div><h4>Lerato</h4><span class="role">NUTRITION ANALYST</span><span class="agent-status">STANDBY</span><p class="agent-task">Waiting to compare quantities and identify gaps.</p></article>
+              <article class="command-agent" data-agent="2"><div class="command-avatar">KA</div><h4>Kabelo</h4><span class="role">VERIFIER · QUALITY</span><span class="agent-status">STANDBY</span><p class="agent-task">Waiting to verify the finding and prepare a handoff.</p></article>
+            </div>
+          </div>
+          <aside class="command-side">
+            <div class="command-side-block"><div class="command-section-label">Live activity feed</div><div class="command-activity" id="commandActivity" aria-live="polite"><div class="command-event current"><span class="command-event-dot"></span><p><b>Byte:</b> Team is standing by. Start the mission to see the handoffs.</p></div></div></div>
+            <div class="command-side-block"><div class="command-section-label">Mission outcome</div><div class="command-outcome"><strong id="commandOutcomeTitle">AWAITING EXECUTION</strong><p id="commandOutcome">The team will prepare a structured review and flag any potential issue for a human decision.</p></div></div>
+          </aside>
+        </div>
+        <div class="command-foot"><span>BYTE IS COORDINATING · HUMAN OVERSIGHT ENABLED</span><span>SIMULATED WORKFLOW / DEMO MODE</span></div>
       </div>
     </div></section>
 
@@ -331,6 +403,57 @@
       byteDemoTimer=setTimeout(advance,350);
     }
     byteDemoLaunch.addEventListener('click',runByteDemo);
+    const commandRun=document.getElementById('commandRun'),commandAgents=[...document.querySelectorAll('.command-agent')],commandActivity=document.getElementById('commandActivity'),commandOutcomeTitle=document.getElementById('commandOutcomeTitle'),commandOutcome=document.getElementById('commandOutcome');
+    let commandTimer=null;
+    const commandSteps=[
+      {agent:0,status:'PLANNING',task:'Splitting the request into menu, quantity, and availability checks.',event:'<b>Thabo · Planner:</b> Task mapped into three checks. Handing the quantities review to Lerato.',outcome:'TASK STRUCTURED'},
+      {agent:1,status:'ANALYSING',task:'Comparing planned meal quantities and flagging a possible shortfall.',event:'<b>Lerato · Analyst:</b> A possible shortage has been identified. Sending the finding to Kabelo for verification.',outcome:'POTENTIAL GAP FLAGGED'},
+      {agent:2,status:'VERIFYING',task:'Checking the flagged result and preparing a human-review handoff.',event:'<b>Kabelo · Verifier:</b> Finding checked. Preparing a concise handoff for human review.',outcome:'VERIFICATION COMPLETE'}
+    ];
+    function addCommandEvent(html,current=false){
+      const item=document.createElement('div');item.className='command-event'+(current?' current':'');
+      const dot=document.createElement('span');dot.className='command-event-dot';
+      const p=document.createElement('p');p.innerHTML=html;
+      item.append(dot,p);commandActivity.append(item);
+    }
+    function resetCommand(){
+      clearTimeout(commandTimer);commandTimer=null;
+      commandAgents.forEach((agent,i)=>{
+        agent.classList.remove('active','done');
+        agent.querySelector('.agent-status').textContent='STANDBY';
+        agent.querySelector('.agent-task').textContent=['Waiting to break the request into clear checks.','Waiting to compare quantities and identify gaps.','Waiting to verify the finding and prepare a handoff.'][i];
+      });
+      commandActivity.innerHTML='';
+      addCommandEvent('<b>Byte:</b> Team is standing by. Start the mission to see the handoffs.',true);
+      commandOutcomeTitle.textContent='AWAITING EXECUTION';
+      commandOutcome.textContent='The team will prepare a structured review and flag any potential issue for a human decision.';
+      commandRun.disabled=false;commandRun.textContent='▶ Run mission';
+    }
+    function runCommandMission(){
+      resetCommand();commandRun.disabled=true;commandRun.textContent='MISSION RUNNING…';
+      commandActivity.innerHTML='';addCommandEvent('<b>Byte:</b> Mission accepted. Assigning the first task to Thabo.',true);
+      commandOutcomeTitle.textContent='WORKFLOW IN PROGRESS';
+      commandOutcome.textContent='The crew is working through the task in sequence.';
+      let index=0;
+      function next(){
+        if(index>0){const previous=commandAgents[index-1];previous.classList.remove('active');previous.classList.add('done');previous.querySelector('.agent-status').textContent='COMPLETE'}
+        if(index===commandSteps.length){
+          addCommandEvent('<b>Byte:</b> All handoffs complete. A person should review the flagged item before any decision is made.');
+          commandOutcomeTitle.textContent='READY FOR HUMAN REVIEW';
+          commandOutcome.textContent='The scripted workflow identified a potential meal-item shortage and prepared it for human review. No real data was analysed.';
+          commandRun.disabled=false;commandRun.textContent='↻ Run again';commandTimer=null;return;
+        }
+        const step=commandSteps[index],agent=commandAgents[step.agent];
+        agent.classList.add('active');agent.querySelector('.agent-status').textContent=step.status;
+        agent.querySelector('.agent-task').textContent=step.task;
+        addCommandEvent(step.event,true);commandOutcomeTitle.textContent=step.outcome;
+        commandOutcome.textContent=step.task;
+        index++;commandTimer=setTimeout(next,1900);
+      }
+      commandTimer=setTimeout(next,450);
+    }
+    commandRun.addEventListener('click',runCommandMission);
+
     byteQuick.addEventListener('click',event=>{
       const button=event.target.closest('[data-byte-question]');if(button)askByte(button.dataset.byteQuestion);
     });
