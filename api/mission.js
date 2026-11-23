@@ -39,7 +39,7 @@ module.exports = async function handler(req, res) {
 
     return res.status(200).json({
       mission: task,
-      model: process.env.GEMINI_MODEL || "gemini-3.8-flash",
+      model: process.env.GEMINI_MODEL || "gemini-3.5-flash-lite",
       simulated: false,
       steps: [
         { agent: "Thabo", role: "Planner", status: "COMPLETE", result: planner },
