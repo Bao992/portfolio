@@ -233,7 +233,8 @@
     botDismiss.addEventListener('click',()=>{clearTimeout(botTimer);bubble.classList.remove('show');handover.classList.remove('show');botHidden=true;botToggle.setAttribute('aria-expanded','false')});
     const sectionObserver=new IntersectionObserver(entries=>{
       const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
-      if(!visible)return;currentSection=visible.target.id||'top';
+      if(!visible)return;const nextSection=visible.target.id||'top';
+      if(nextSection===currentSection)return;currentSection=nextSection;
       if(!botHidden&&currentSection!=='top'&&!handover.classList.contains('show'))showByte(byteMessages[currentSection]||byteMessages.top);
     },{threshold:[.35,.6]});
     document.querySelectorAll('main > section[id]').forEach(section=>sectionObserver.observe(section));
