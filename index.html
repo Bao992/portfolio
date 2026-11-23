@@ -547,6 +547,8 @@
         else if(tool.tool==='check_plan_structure') detail.textContent='Sections found: '+tool.sectionsFound.join(', ')+' · Missing: '+(tool.missingSections.join(', ')||'None')+' · Action items: '+tool.actionItemsFound;
         else if(tool.tool==='audit_analysis_evidence') detail.textContent='Numeric claims checked: '+tool.numbersFoundInAnalysis.length+' · Unsupported numeric claims: '+(tool.unsupportedNumericClaims.join(', ')||'None')+'. '+tool.note;
         else if(tool.tool==='verify_mission_outputs') detail.textContent=tool.passedCount+'/'+tool.totalChecks+' checks passed. '+tool.checks.filter(item=>!item.passed).map(item=>item.name).join('; ');
+        else if(tool.tool==='plan_validation_attempt') detail.textContent='Attempt '+tool.attempt+' · '+(tool.passed?'Required structure passed':'Missing: '+(tool.missingSections.join(', ')||'None')+' · Action items: '+tool.actionItemsFound);
+        else if(tool.tool==='planner_correction_and_gate') detail.textContent='Planner correction '+(tool.passed?'passed':'failed')+'. '+tool.note;
         card.append(detail);missionToolResults.append(card);
       });
       if(!tools||!tools.length)missionToolResults.textContent='No tool results returned for this mission.';
@@ -573,18 +575,27 @@
         renderMissionToolResults(data.tools);
         data.steps.forEach((step,index)=>{
           const card=commandAgents[index],profile=agentProfiles[index];
-          card.classList.remove('active');card.classList.add('done');card.querySelector('.agent-status').textContent='COMPLETE';
+          const stepStatus=step.status||'COMPLETE';
+          card.classList.remove('active','done');
+          if(stepStatus==='COMPLETE')card.classList.add('done');
+          card.querySelector('.agent-status').textContent=stepStatus.replaceAll('_',' ');
           card.querySelector('.agent-task').textContent=step.result;
-          profile.assignment=step.result;profile.history.push(step.status+' · '+new Date().toLocaleTimeString());
+          profile.assignment=step.result;profile.history.push(stepStatus+' · '+new Date().toLocaleTimeString());
           const preview=step.result.replace(/\s+/g,' ').trim();
-          profile.messages.push('Byte → '+step.agent+': Assignment completed.');
+          profile.messages.push('Byte → '+step.agent+': '+(stepStatus==='COMPLETE'?'Assignment completed.':stepStatus==='NOT_RUN'?'Handoff blocked; this agent was not started.':'Output requires correction or human review.'));
           profile.messages.push(step.agent+' → Byte: '+(preview.length>220?preview.slice(0,217)+'…':preview));
           addCommandTextEvent(step.agent,preview.length>240?preview.slice(0,237)+'…':preview);
           renderAgentWorkspace(index);
         });
-        commandOutcomeTitle.textContent='READY FOR HUMAN REVIEW';
-        commandOutcome.textContent='All three AI agents completed their individual steps. Review the findings and supporting evidence yourself before acting. The agents have not executed external actions.';
-        addCommandTextEvent('Byte','Mission complete. Human review is required before any decision or action.');
+        if(data.status==='BLOCKED'){
+          commandOutcomeTitle.textContent='PLANNER GATE BLOCKED';
+          commandOutcome.textContent='Thabo’s plan did not pass validation after one correction attempt. Lerato and Kabelo were not started. Review the missing requirements and retry the mission.';
+          addCommandTextEvent('Byte','Mission paused at the planning quality gate. Downstream handoffs were blocked.',true);
+        }else{
+          commandOutcomeTitle.textContent='READY FOR HUMAN REVIEW';
+          commandOutcome.textContent='All three AI agents completed their individual steps. Review the findings and supporting evidence yourself before acting. The agents have not executed external actions.';
+          addCommandTextEvent('Byte','Mission complete. Human review is required before any decision or action.');
+        }
       }catch(error){
         commandOutcomeTitle.textContent='MISSION INTERRUPTED';
         commandOutcome.textContent=error.message||'The team encountered an error. Check the AI configuration and try again.';
