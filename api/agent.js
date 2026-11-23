@@ -34,13 +34,14 @@ VERIFIED PORTFOLIO FACTS:
 ${portfolioFacts}`;
 
   try {
-    const reply = await generateText(system, message, 420);
-    return res.status(200).json({ reply, agent: "Byte", model: process.env.GEMINI_MODEL || "gemini-3.8-flash" });
+    const result = await generateText(system, message, 420);
+    return res.status(200).json({ reply: result.text, agent: "Byte", model: result.model });
   } catch (error) {
     if (error.code === "AI_NOT_CONFIGURED") {
       return res.status(503).json({ error: "Byte's AI connection is not configured yet. Add GEMINI_API_KEY to the Vercel project environment variables." });
     }
     if (error.status === 429) return res.status(429).json({ error: "The free AI usage limit has been reached for now. Please try again later." });
+    if (error.status === 503) return res.status(503).json({ error: "Gemini models are temporarily busy. We tried the available fallback models; please try again shortly." });
     console.error("Byte API error:", error.status || error.code || "unknown", error.providerMessage || "");
     return res.status(502).json({ error: "Byte couldn't reach the AI service just now. Please try again shortly." });
   }
