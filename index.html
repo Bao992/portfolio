@@ -1,381 +1,171 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bao Kekana — Developer</title>
-<meta name="description" content="Bao Kekana — Computer Science student & developer. Portfolio built as a git log.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:         #0a0d12;
-    --panel:      #10141b;
-    --panel-2:    #0d1117;
-    --border:     #1c2330;
-    --text:       #c7d1de;
-    --muted:      #5b6577;
-    --dim:        #3a4252;
-    --green:      #3fd68c;
-    --green-dim:  #245b40;
-    --amber:      #e3b341;
-    --red:        #f0665e;
-    --blue:       #6ab7ff;
-    --purple:     #b088f5;
-    --mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  }
-
-  *{ box-sizing:border-box; margin:0; padding:0; }
-
-  html{ scroll-behavior:smooth; }
-
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--mono);
-    font-size:15px;
-    line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-    background-image:
-      radial-gradient(circle at 15% 0%, rgba(63,214,140,0.05), transparent 40%),
-      radial-gradient(circle at 85% 20%, rgba(106,183,255,0.05), transparent 40%);
-  }
-
-  a{ color:var(--blue); text-decoration:none; border-bottom:1px solid transparent; }
-  a:hover{ border-bottom-color:var(--blue); }
-  a:focus-visible, button:focus-visible, summary:focus-visible{
-    outline:2px solid var(--green); outline-offset:3px; border-radius:2px;
-  }
-
-  ::selection{ background:var(--green-dim); color:#eafff4; }
-
-  .wrap{ max-width:820px; margin:0 auto; padding:56px 20px 120px; }
-
-  /* ---------- terminal window chrome ---------- */
-  .term{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:8px;
-    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
-    overflow:hidden;
-  }
-  .term-bar{
-    display:flex; align-items:center; gap:8px;
-    padding:11px 14px;
-    background:var(--panel-2);
-    border-bottom:1px solid var(--border);
-  }
-  .dot{ width:11px; height:11px; border-radius:50%; }
-  .dot.r{ background:#f0665e55; border:1px solid #f0665e88; }
-  .dot.y{ background:#e3b34155; border:1px solid #e3b34188; }
-  .dot.g{ background:#3fd68c55; border:1px solid #3fd68c88; }
-  .term-title{
-    flex:1; text-align:center;
-    color:var(--muted); font-size:12.5px; letter-spacing:.02em;
-  }
-  .term-body{ padding:34px 30px 10px; }
-
-  @media (max-width:600px){
-    .wrap{ padding:28px 12px 90px; }
-    .term-body{ padding:26px 16px 8px; }
-  }
-
-  /* ---------- prompt lines ---------- */
-  .cmd{
-    display:flex; gap:10px; align-items:baseline;
-    margin:0 0 14px;
-    color:var(--muted);
-    font-size:13.5px;
-  }
-  .cmd .prompt{ color:var(--green); }
-  .cmd .path{ color:var(--purple); }
-  .cmd .arg{ color:var(--text); }
-
-  section{ margin-bottom:52px; }
-  section:last-of-type{ margin-bottom:8px; }
-
-  .out{ padding-left:2px; margin-bottom:4px; }
-
-  /* ---------- hero ---------- */
-  .hero-name{
-    font-size:clamp(28px, 5vw, 40px);
-    font-weight:700;
-    color:#f2f5f9;
-    letter-spacing:-0.01em;
-    margin-bottom:6px;
-  }
-  .hero-role{ color:var(--green); font-size:15px; margin-bottom:18px; }
-  .hero-role::before{ content:'// '; color:var(--dim); }
-
-  .cursor{
-    display:inline-block; width:8px; height:1.1em;
-    background:var(--green); vertical-align:text-bottom;
-    animation:blink 1s steps(1) infinite;
-    margin-left:2px;
-  }
-  @keyframes blink{ 50%{ opacity:0; } }
-  @media (prefers-reduced-motion:reduce){ .cursor{ animation:none; opacity:1; } }
-
-  .hero-desc{ color:var(--text); max-width:56ch; }
-  .hero-desc .k{ color:var(--amber); }
-
-  .hero-links{ display:flex; flex-wrap:wrap; gap:18px; margin-top:22px; font-size:13.5px; }
-  .hero-links a{ color:var(--muted); border:1px solid var(--border); padding:6px 12px; border-radius:5px; }
-  .hero-links a:hover{ color:var(--green); border-color:var(--green-dim); }
-
-  /* ---------- section headers ---------- */
-  h2.sec{
-    font-size:13px; text-transform:uppercase; letter-spacing:.12em;
-    color:var(--dim); margin-bottom:18px;
-    display:flex; align-items:center; gap:10px;
-  }
-  h2.sec::after{ content:''; flex:1; height:1px; background:var(--border); }
-
-  /* ---------- about ---------- */
-  .about p{ color:var(--text); max-width:64ch; margin-bottom:12px; }
-  .about .comment{ color:var(--dim); }
-  .about .field{ color:var(--muted); }
-  .about .val{ color:var(--text); }
-
-  /* ---------- skills (ls -la) ---------- */
-  .skills-grid{
-    display:grid; grid-template-columns:repeat(2, 1fr);
-    gap:2px 28px; font-size:13.5px;
-  }
-  @media (max-width:600px){ .skills-grid{ grid-template-columns:1fr; } }
-  .skill-row{
-    display:flex; justify-content:space-between; gap:10px;
-    padding:7px 0; border-bottom:1px dashed var(--border);
-    color:var(--text);
-  }
-  .skill-row span.tag{ color:var(--dim); font-size:11.5px; }
-  .skill-row.learning span.tag{ color:var(--amber); }
-  .skill-row.core span.tag{ color:var(--green); }
-
-  /* ---------- projects (git log) ---------- */
-  .commit{
-    position:relative;
-    padding:0 0 30px 26px;
-    border-left:1px solid var(--border);
-  }
-  .commit:last-child{ padding-bottom:2px; }
-  .commit::before{
-    content:''; position:absolute; left:-5px; top:5px;
-    width:9px; height:9px; border-radius:50%;
-    background:var(--panel); border:2px solid var(--green);
-  }
-  .commit-head{
-    display:flex; flex-wrap:wrap; align-items:baseline; gap:10px;
-    margin-bottom:6px;
-  }
-  .hash{ color:var(--amber); font-size:13px; }
-  .commit-msg{ color:#eef2f7; font-weight:600; font-size:15.5px; }
-  .commit-meta{ color:var(--dim); font-size:12px; margin-bottom:10px; }
-  .commit-body{ color:var(--text); max-width:62ch; margin-bottom:12px; }
-  .diffstat{
-    display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;
-  }
-  .diffstat span{
-    font-size:11.5px; padding:3px 8px; border-radius:4px;
-    background:var(--panel-2); border:1px solid var(--border); color:var(--muted);
-  }
-  .commit-links{ display:flex; gap:16px; font-size:13px; }
-  .commit-links a::before{ content:'→ '; color:var(--dim); }
-  .commit-links a.muted{ color:var(--dim); cursor:default; }
-  .commit-links a.muted::after{ content:' (private repo — link on request)'; font-size:11px; }
-  .commit-links a.muted:hover{ border-bottom-color:transparent; }
-
-  /* ---------- education (cat) ---------- */
-  .edu-item{ margin-bottom:16px; }
-  .edu-item .title{ color:#eef2f7; font-weight:600; }
-  .edu-item .sub{ color:var(--muted); font-size:13px; }
-
-  /* ---------- contact ---------- */
-  .contact-lines{ font-size:14px; }
-  .contact-lines div{ margin-bottom:9px; display:flex; gap:12px; }
-  .contact-lines .k{ color:var(--dim); width:92px; flex-shrink:0; }
-
-  footer{
-    text-align:center; color:var(--dim); font-size:12px;
-    margin-top:60px; padding-top:24px; border-top:1px solid var(--border);
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080b12" />
+  <meta name="description" content="Bao Kekana is an emerging AI and full-stack developer building useful software, exploring agentic systems, and turning ideas into working products." />
+  <meta property="og:title" content="Bao Kekana — AI & Software Developer" />
+  <meta property="og:description" content="Building useful software. Exploring intelligent systems. Engineering what comes next." />
+  <meta property="og:type" content="website" />
+  <title>Bao Kekana — AI & Software Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#080b12;--panel:#101622;--panel2:#0c111b;--line:rgba(164,184,218,.14);--text:#eef3ff;--muted:#9aa8bd;--soft:#66758e;--cyan:#6ee7f9;--blue:#7c9cff;--violet:#b69cff;--green:#8ce8bd;--mono:"DM Mono",monospace;--sans:"DM Sans",sans-serif;--display:"Space Grotesk",sans-serif;--max:1160px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.65;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;background:radial-gradient(ellipse at 12% 8%,rgba(73,116,255,.15),transparent 36%),radial-gradient(ellipse at 88% 20%,rgba(122,75,214,.13),transparent 32%),radial-gradient(ellipse at 50% 100%,rgba(30,174,190,.07),transparent 42%)}
+    body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.16;background-image:linear-gradient(rgba(155,177,220,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(155,177,220,.08) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(to bottom,black,transparent 75%)}
+    a{color:inherit;text-decoration:none}button{font:inherit}.container{width:min(var(--max),calc(100% - 48px));margin:auto}.mono{font-family:var(--mono)}.eyebrow{font:12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}.gradient{background:linear-gradient(100deg,#fff 0%,#a9c4ff 42%,#83e7ee 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .nav-wrap{position:sticky;top:0;z-index:20;background:rgba(8,11,18,.78);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}nav{height:76px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:11px;font:600 15px var(--display);letter-spacing:.04em}.brand-mark{width:34px;height:34px;border:1px solid rgba(110,231,249,.55);border-radius:11px;display:grid;place-items:center;color:var(--cyan);background:linear-gradient(145deg,rgba(110,231,249,.13),rgba(124,156,255,.08));box-shadow:0 0 24px rgba(110,231,249,.12)}.brand-mark span{font:600 15px var(--mono)}.nav-links{display:flex;align-items:center;gap:27px;color:var(--muted);font-size:13px}.nav-links a:hover{color:var(--cyan)}.nav-cta{border:1px solid rgba(110,231,249,.35);padding:9px 14px;border-radius:8px;color:var(--cyan)!important}.menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 10px}
+    .hero{min-height:690px;display:grid;grid-template-columns:1.12fr .88fr;align-items:center;gap:42px;padding:88px 0 100px}.availability{display:inline-flex;align-items:center;gap:9px;padding:7px 11px;border:1px solid rgba(140,232,189,.22);background:rgba(140,232,189,.06);border-radius:999px;color:#b7f3d4;font:11px var(--mono);letter-spacing:.04em}.pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(140,232,189,.1);animation:pulse 2s infinite}@keyframes pulse{50%{box-shadow:0 0 0 9px rgba(140,232,189,0)}}
+    h1{font:600 clamp(48px,7vw,82px)/.99 var(--display);letter-spacing:-.065em;margin:27px 0 22px}.hero-role{font:500 clamp(17px,2vw,21px) var(--display);color:#c6d3e9;margin-bottom:18px}.hero-copy{max-width:590px;color:var(--muted);font-size:16px;line-height:1.85}.hero-copy strong{color:var(--text);font-weight:600}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 17px;border-radius:9px;border:1px solid var(--line);font-size:13px;font-weight:600;transition:.2s}.btn-primary{color:#071019;background:linear-gradient(110deg,var(--cyan),#a5c1ff);border-color:transparent;box-shadow:0 8px 30px rgba(110,231,249,.13)}.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(110,231,249,.22)}.btn-ghost{color:var(--text);background:rgba(255,255,255,.025)}.btn-ghost:hover{border-color:rgba(110,231,249,.45);color:var(--cyan)}.hero-meta{display:flex;gap:22px;flex-wrap:wrap;margin-top:32px;color:var(--soft);font:11px var(--mono)}.hero-meta span:before{content:"↗";color:var(--cyan);margin-right:7px}
+    .visual{position:relative;min-height:430px;display:grid;place-items:center}.orbital{position:absolute;width:min(390px,90%);aspect-ratio:1;border:1px solid rgba(124,156,255,.18);border-radius:50%;transform:rotate(-22deg)}.orbital:before,.orbital:after{content:"";position:absolute;inset:28px;border:1px solid rgba(110,231,249,.13);border-radius:50%;transform:rotate(50deg) scaleX(1.28)}.orbital:after{inset:66px;transform:rotate(-35deg) scaleX(1.4);border-color:rgba(182,156,255,.18)}.orbital-dot{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 22px var(--cyan);top:14%;right:17%}.core-card{position:relative;width:min(340px,90%);padding:22px;border:1px solid rgba(160,183,231,.2);border-radius:18px;background:linear-gradient(145deg,rgba(20,30,48,.94),rgba(12,17,28,.94));box-shadow:0 30px 90px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.05);backdrop-filter:blur(12px)}.core-top{display:flex;justify-content:space-between;align-items:center;color:var(--soft);font:10px var(--mono);letter-spacing:.1em;text-transform:uppercase}.live-indicator{color:var(--green)}.core-title{font:600 25px var(--display);margin:20px 0 4px}.core-sub{color:var(--muted);font-size:12px}.signal{height:1px;background:linear-gradient(90deg,transparent,var(--cyan),var(--violet),transparent);margin:22px 0;opacity:.7}.agent-row{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--line)}.agent-row:last-child{border:0}.agent-icon{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:rgba(124,156,255,.12);color:#b8c9ff;font:12px var(--mono)}.agent-text{flex:1}.agent-text b{display:block;font-size:12px;font-weight:600}.agent-text small{color:var(--soft);font:10px var(--mono)}.agent-state{font:10px var(--mono);color:var(--green)}.float-label{position:absolute;padding:8px 11px;border:1px solid var(--line);border-radius:8px;background:rgba(13,18,29,.86);color:#c8d5ed;font:10px var(--mono);box-shadow:0 10px 30px #0004}.float-a{top:55px;left:0}.float-b{right:-4px;bottom:70px}
+    section{padding:82px 0;border-top:1px solid var(--line)}.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:36px}.section-head h2{font:600 clamp(30px,4vw,43px)/1.1 var(--display);letter-spacing:-.04em;margin:9px 0 0}.section-intro{max-width:460px;color:var(--muted);font-size:14px;margin:0}
+    .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:50px}.about-copy p{color:var(--muted);font-size:15px;line-height:1.9;margin:0 0 16px}.about-copy strong{color:var(--text)}.principles{display:grid;gap:12px}.principle{padding:17px;border:1px solid var(--line);border-radius:12px;background:rgba(16,22,34,.58)}.principle .num{font:11px var(--mono);color:var(--cyan)}.principle h3{font:600 15px var(--display);margin:7px 0 3px}.principle p{font-size:12px;color:var(--muted);margin:0}
+    .project-tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}.filter{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:7px 13px;font:11px var(--mono);cursor:pointer}.filter.active,.filter:hover{color:var(--cyan);border-color:rgba(110,231,249,.4);background:rgba(110,231,249,.06)}.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.project{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:linear-gradient(145deg,rgba(18,26,40,.85),rgba(12,17,27,.92));transition:.25s;display:flex;flex-direction:column}.project:hover{transform:translateY(-4px);border-color:rgba(110,231,249,.34);box-shadow:0 18px 48px rgba(0,0,0,.2)}.project[hidden]{display:none}.project-art{height:150px;position:relative;overflow:hidden;background:radial-gradient(circle at 72% 34%,rgba(110,231,249,.2),transparent 30%),linear-gradient(135deg,#111c31,#15152b)}.project-art:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:24px 24px;mask-image:linear-gradient(black,transparent)}.art-code{position:absolute;left:22px;top:24px;font:11px/1.8 var(--mono);color:#a8bad7}.art-code span{color:var(--cyan)}.art-orbit{position:absolute;width:150px;height:90px;border:1px solid rgba(110,231,249,.55);border-radius:50%;right:25px;top:30px;transform:rotate(-28deg);box-shadow:0 0 35px rgba(110,231,249,.12)}.art-orbit:after{content:"";position:absolute;inset:14px -12px;border:1px solid rgba(182,156,255,.45);border-radius:50%;transform:rotate(58deg)}.art-panel{position:absolute;right:34px;top:35px;width:120px;height:78px;border:1px solid rgba(160,183,231,.35);border-radius:8px;background:rgba(7,13,24,.68);padding:10px}.art-panel i{display:block;height:4px;border-radius:4px;background:rgba(110,231,249,.6);margin:5px 0;width:70%}.art-panel i:nth-child(2){width:90%;background:rgba(182,156,255,.5)}.art-panel i:nth-child(3){width:52%}.project-body{padding:20px;display:flex;flex-direction:column;flex:1}.project-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.project-type{font:10px var(--mono);color:var(--cyan);text-transform:uppercase;letter-spacing:.1em}.status{font:9px var(--mono);padding:4px 7px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}.project h3{font:600 20px var(--display);margin:11px 0 7px}.project p{font-size:13px;color:var(--muted);line-height:1.75;margin:0 0 16px}.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}.tags span{font:9px var(--mono);padding:5px 7px;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:5px;color:#b6c4da}.project-links{display:flex;gap:16px;margin-top:17px;font:11px var(--mono)}.project-links a{color:var(--cyan)}.project-links a:hover{text-decoration:underline}.project-links a.secondary{color:var(--muted)}
+    .agentic{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;align-items:stretch}.agent-panel{border:1px solid rgba(124,156,255,.22);border-radius:16px;padding:24px;background:radial-gradient(circle at 100% 0,rgba(124,156,255,.12),transparent 40%),rgba(16,22,34,.72)}.agent-panel h3{font:600 22px var(--display);margin:12px 0}.agent-panel p{font-size:13px;color:var(--muted);line-height:1.8}.agent-list{display:grid;gap:10px}.agent-step{display:flex;gap:15px;padding:17px;border:1px solid var(--line);border-radius:12px;background:rgba(16,22,34,.52)}.agent-step .step{font:12px var(--mono);color:var(--cyan);padding-top:2px}.agent-step h4{font:600 14px var(--display);margin:0 0 4px}.agent-step p{font-size:12px;color:var(--muted);margin:0}
+    .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.skill-card{padding:20px;border:1px solid var(--line);border-radius:12px;background:rgba(16,22,34,.55)}.skill-card h3{font:600 14px var(--display);margin:0 0 13px}.skill-card p{font-size:12px;line-height:1.9;color:var(--muted);margin:0}.learning-note{font:10px var(--mono);color:#d5bdff;margin-top:12px}
+    .timeline{display:grid;grid-template-columns:1fr 1fr;gap:15px}.timeline-item{padding:20px;border:1px solid var(--line);border-radius:12px;background:rgba(16,22,34,.5)}.timeline-item .date{font:10px var(--mono);color:var(--cyan)}.timeline-item h3{font:600 16px var(--display);margin:8px 0 4px}.timeline-item p{font-size:12px;color:var(--muted);margin:0}
+    .contact-box{border:1px solid rgba(110,231,249,.24);border-radius:18px;padding:clamp(25px,5vw,48px);background:radial-gradient(circle at 90% 10%,rgba(124,156,255,.13),transparent 35%),linear-gradient(135deg,rgba(16,28,43,.9),rgba(12,17,27,.95));display:flex;justify-content:space-between;align-items:center;gap:28px}.contact-box h2{font:600 clamp(30px,4vw,44px)/1.1 var(--display);letter-spacing:-.04em;margin:10px 0}.contact-box p{color:var(--muted);font-size:14px;max-width:530px;margin:0}.contact-actions{display:flex;flex-direction:column;gap:10px;min-width:165px}.footer{padding:28px 0 40px;display:flex;justify-content:space-between;gap:20px;color:var(--soft);font:10px var(--mono)}.footer a{color:var(--muted)}.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.reveal.visible{opacity:1;transform:none}
+    @media(max-width:850px){.hero{grid-template-columns:1fr;gap:10px;padding:70px 0 65px}.visual{min-height:370px}.about-grid,.agentic{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}.contact-box{align-items:flex-start;flex-direction:column}.contact-actions{flex-direction:row;flex-wrap:wrap}.skills-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:620px){.container{width:min(100% - 32px,var(--max))}nav{height:66px}.menu-btn{display:block}.nav-links{display:none;position:absolute;top:65px;left:0;right:0;padding:18px 24px 22px;background:rgba(8,11,18,.97);border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:17px}.nav-links.open{display:flex}.hero{padding-top:58px}h1{font-size:55px}.visual{min-height:330px}.float-a{left:-4px}.float-b{right:-5px}.projects-grid,.timeline{grid-template-columns:1fr}.skills-grid{grid-template-columns:1fr 1fr}section{padding:65px 0}.section-head{margin-bottom:27px}.footer{flex-direction:column}.project-art{height:135px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  </style>
 </head>
 <body>
+  <div class="nav-wrap"><nav class="container">
+    <a class="brand" href="#top" aria-label="Bao Kekana home"><span class="brand-mark"><span>BK</span></span><span>BAO<span style="color:var(--cyan)">.</span>LAB</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <div class="nav-links" id="navLinks"><a href="#about">About</a><a href="#work">Selected work</a><a href="#agentic">Agentic AI</a><a href="#skills">Capabilities</a><a href="#contact" class="nav-cta">Let's connect ↗</a></div>
+  </nav></div>
 
-<div class="wrap">
-  <div class="term">
-    <div class="term-bar">
-      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-      <span class="term-title">bao@portfolio — zsh — 82×40</span>
-    </div>
-
-    <div class="term-body">
-
-      <!-- HERO -->
-      <section>
-        <div class="cmd"><span class="prompt">bao@dev</span>:<span class="path">~</span>$ <span class="arg">whoami</span></div>
-        <div class="hero-name">Bao Kekana<span class="cursor" aria-hidden="true"></span></div>
-        <div class="hero-role">final-year computer science student — full-stack developer</div>
-        <p class="hero-desc">
-          Pretoria/Johannesburg-based developer finishing a <span class="k">BSc Computer Science</span> at UNISA,
-          currently building full-stack projects through the <span class="k">Melsoft Academy AI Fullstack Engineering Program</span>.
-          I use AI tools daily as part of how I build, debug and ship — not just as a novelty. Looking for a junior role
-          where I can keep learning fast and contribute from day one.
-        </p>
-        <div class="hero-links">
-          <a href="https://github.com/Bao992" target="_blank" rel="noopener">github.com/Bao992</a>
-          <a href="https://www.linkedin.com/in/bao-kekana-080a40322" target="_blank" rel="noopener">linkedin.com/in/bao-kekana</a>
-          <a href="mailto:bao.kekana@icloud.com">bao.kekana@icloud.com</a>
+  <main id="top">
+    <header class="container hero">
+      <div class="hero-content">
+        <div class="availability"><span class="pulse"></span> OPEN TO REMOTE OPPORTUNITIES · 15–20 HRS/WEEK</div>
+        <p class="eyebrow" style="margin:28px 0 0">Developer · AI explorer · Problem solver</p>
+        <h1>Hi, I'm Bao.<br/><span class="gradient">I build what's next.</span></h1>
+        <div class="hero-role">Emerging AI & Full-Stack Developer</div>
+        <p class="hero-copy">I turn ideas into useful digital products. I enjoy building across the stack, solving practical problems, and exploring how <strong>AI agents and intelligent workflows</strong> can make software more capable, helpful, and reliable.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#work">Explore my work <span>↘</span></a><a class="btn btn-ghost" href="mailto:bao.kekana@icloud.com">Get in touch ↗</a></div>
+        <div class="hero-meta"><span>Based in Limpopo, South Africa</span><span>Available for remote work</span></div>
+      </div>
+      <div class="visual" aria-label="Abstract visual representing connected AI agents">
+        <div class="orbital"><span class="orbital-dot"></span></div>
+        <div class="float-label float-a">SYSTEMS THINKING / 01</div><div class="float-label float-b">HUMAN + MACHINE</div>
+        <div class="core-card">
+          <div class="core-top"><span>BAO AI LAB / CONCEPT</span><span class="live-indicator">● EXPLORING</span></div>
+          <div class="core-title">Ideas into systems.</div><div class="core-sub">A builder's workspace for intelligent products.</div>
+          <div class="signal"></div>
+          <div class="agent-row"><span class="agent-icon">01</span><span class="agent-text"><b>Build</b><small>PRODUCT ENGINEERING</small></span><span class="agent-state">ACTIVE</span></div>
+          <div class="agent-row"><span class="agent-icon">02</span><span class="agent-text"><b>Explore</b><small>AGENTIC WORKFLOWS</small></span><span class="agent-state">LEARNING</span></div>
+          <div class="agent-row"><span class="agent-icon">03</span><span class="agent-text"><b>Verify</b><small>QUALITY & RELIABILITY</small></span><span class="agent-state">FOCUS</span></div>
         </div>
-      </section>
+      </div>
+    </header>
 
-      <!-- ABOUT -->
-      <section class="about" id="about">
-        <div class="cmd"><span class="prompt">bao@dev</span>:<span class="path">~</span>$ <span class="arg">cat about.md</span></div>
-        <h2 class="sec">about</h2>
-        <p><span class="comment"># currently</span></p>
-        <p><span class="field">status</span> → <span class="val">final-year student, actively job-hunting for junior/graduate developer roles</span></p>
-        <p><span class="field">focus</span> → <span class="val">React, TypeScript, Tailwind CSS, and AI-assisted full-stack development</span></p>
-        <p><span class="field">approach</span> → <span class="val">learn by shipping — every project below is real, deployed, and built end-to-end rather than left as a tutorial clone</span></p>
-      </section>
-
-      <!-- SKILLS -->
-      <section id="skills">
-        <div class="cmd"><span class="prompt">bao@dev</span>:<span class="path">~/skills</span>$ <span class="arg">ls -la</span></div>
-        <h2 class="sec">skills</h2>
-        <div class="skills-grid">
-          <div class="skill-row core"><span>React</span><span class="tag">core</span></div>
-          <div class="skill-row core"><span>TypeScript</span><span class="tag">core</span></div>
-          <div class="skill-row core"><span>Tailwind CSS</span><span class="tag">core</span></div>
-          <div class="skill-row core"><span>HTML / CSS</span><span class="tag">core</span></div>
-          <div class="skill-row core"><span>Git &amp; GitHub</span><span class="tag">core</span></div>
-          <div class="skill-row core"><span>AI-assisted dev (Claude, Copilot)</span><span class="tag">daily</span></div>
-          <div class="skill-row learning"><span>REST APIs</span><span class="tag">learning</span></div>
-          <div class="skill-row learning"><span>Supabase (Postgres + Auth)</span><span class="tag">learning</span></div>
+    <section id="about"><div class="container reveal">
+      <div class="section-head"><div><div class="eyebrow">01 / The person behind the projects</div><h2>Curious by nature.<br/><span class="gradient">Builder by practice.</span></h2></div><p class="section-intro">I learn by making things, testing ideas, collaborating with others, and improving what I've built.</p></div>
+      <div class="about-grid">
+        <div class="about-copy"><p>I'm <strong>Bao Kekana</strong>, a Computer Science and Mathematics student at the University of South Africa, currently completing my final-year modules. My journey combines a strong interest in software engineering with a growing focus on AI, automation, and agentic systems.</p><p>Through personal projects, academy work, hackathons, and collaborative development, I've worked with frontend interfaces, backend APIs, databases, Git workflows, and AI-assisted problem-solving. I'm especially interested in technology that solves real problems rather than adding AI just for the sake of it.</p><p>I'm currently looking for opportunities where I can contribute, learn from experienced teams, and grow as an engineer.</p></div>
+        <div class="principles">
+          <article class="principle"><span class="num">01 / BUILD</span><h3>Make ideas tangible</h3><p>Turn a problem or concept into a working, testable product.</p></article>
+          <article class="principle"><span class="num">02 / EXPLORE</span><h3>Stay curious about AI</h3><p>Experiment with AI-assisted development, agents, and automation.</p></article>
+          <article class="principle"><span class="num">03 / IMPROVE</span><h3>Care about the details</h3><p>Debug, verify, collaborate, and keep improving the result.</p></article>
         </div>
-      </section>
+      </div>
+    </div></section>
 
-      <!-- PROJECTS -->
-      <section id="projects">
-        <div class="cmd"><span class="prompt">bao@dev</span>:<span class="path">~/projects</span>$ <span class="arg">git log --stat</span></div>
-        <h2 class="sec">projects</h2>
+    <section id="work"><div class="container reveal">
+      <div class="section-head"><div><div class="eyebrow">02 / Selected work</div><h2>Projects with a purpose.</h2></div><p class="section-intro">A selection of things I've built or contributed to. Each project represents a problem explored, a skill developed, or a real-world workflow understood.</p></div>
+      <div class="project-tools" role="group" aria-label="Filter projects"><button class="filter active" data-filter="all">All projects</button><button class="filter" data-filter="ai">AI & agentic</button><button class="filter" data-filter="fullstack">Full-stack</button><button class="filter" data-filter="live">Live demos</button></div>
+      <div class="projects-grid">
+        <article class="project" data-category="ai fullstack">
+          <div class="project-art"><div class="art-code"><span>const</span> colleague = {<br/> &nbsp; mission: <span>"school nutrition"</span>,<br/> &nbsp; workflow: <span>"multi-agent"</span><br/>}</div><div class="art-orbit"></div></div>
+          <div class="project-body"><div class="project-top"><span class="project-type">AI · Hackathon prototype</span><span class="status">IN PROGRESS</span></div><h3>NutriTrack</h3><p>An AI-powered School Nutrition Colleague concept exploring how specialised agents could support meal planning and identify school meal shortages. I scaffolded the application, built API routes, and tested meal calculation logic.</p><div class="tags"><span>Multi-agent concepts</span><span>Node.js</span><span>Express</span><span>React</span><span>TypeScript</span></div><div class="project-links"><a href="https://github.com/Bao992/NutriTrack" target="_blank" rel="noopener">View repository ↗</a></div></div>
+        </article>
+        <article class="project" data-category="fullstack">
+          <div class="project-art"><div class="art-panel"><i></i><i></i><i></i><i></i></div><div class="art-code"><span>FixFlow</span><br/>maintenance =<br/>{ accountability: true,<br/> &nbsp; resolution: true<br/>}</div></div>
+          <div class="project-body"><div class="project-top"><span class="project-type">PropTech · SaaS</span><span class="status">IN DEVELOPMENT</span></div><h3>FixFlow</h3><p>A property maintenance operations platform focused on accountability from tenant request to verified resolution. Work includes product requirements, implementation planning, interface design, and frontend development.</p><div class="tags"><span>Product thinking</span><span>React</span><span>TypeScript</span><span>AI workflows</span></div><div class="project-links"><a href="https://github.com/Bao992/fixflow-property-ops" target="_blank" rel="noopener">View repository ↗</a></div></div>
+        </article>
+        <article class="project" data-category="fullstack">
+          <div class="project-art"><div class="art-orbit" style="width:125px;height:125px;right:35px;top:12px;border-radius:22px;transform:rotate(12deg)"></div><div class="art-code"><span>const</span> planetPulse = {<br/> &nbsp; earth: <span>"live data"</span>,<br/> &nbsp; space: <span>"activity"</span><br/>}</div></div>
+          <div class="project-body"><div class="project-top"><span class="project-type">Data dashboard · Full-stack</span><span class="status">PROJECT</span></div><h3>Planet Pulse</h3><p>A real-time Earth and Space Activity Dashboard built with React, Supabase, and public APIs, featuring ISS tracking, earthquake monitoring, data filtering, and astronaut management.</p><div class="tags"><span>React</span><span>Supabase</span><span>Public APIs</span><span>Data visualisation</span></div><div class="project-links"><a href="https://github.com/Bao992/Planet-Pulse" target="_blank" rel="noopener">View repository ↗</a></div></div>
+        </article>
+        <article class="project" data-category="fullstack">
+          <div class="project-art"><div class="art-panel" style="width:145px"><i></i><i></i><i></i><i></i></div><div class="art-code"><span>POST</span> /api/bookings<br/><span>GET</span> /api/resources<br/><span>CHECK</span> conflicts()</div></div>
+          <div class="project-body"><div class="project-top"><span class="project-type">Backend · API</span><span class="status">PROJECT</span></div><h3>Riverside Connect</h3><p>A church resource booking system with resource management, booking creation, conflict detection, booking statistics, validation, and API documentation.</p><div class="tags"><span>React</span><span>TypeScript</span><span>Express</span><span>Supabase</span></div><div class="project-links"><a href="https://github.com/Bao992/Repository-name-riverside-connect-Description-Church-Resource-Booking-System-Public" target="_blank" rel="noopener">View repository ↗</a></div></div>
+        </article>
+        <article class="project" data-category="fullstack">
+          <div class="project-art"><div class="art-code"><span>router</span>.post(<br/> &nbsp; <span>"/tasks"</span>,<br/> &nbsp; validateTask,<br/> &nbsp; createTask<br/>)</div><div class="art-orbit" style="width:100px;height:100px;right:45px;top:25px"></div></div>
+          <div class="project-body"><div class="project-top"><span class="project-type">Backend · REST API</span><span class="status">PROJECT</span></div><h3>TaskForge API</h3><p>A task management API built with Node.js and Express, exploring backend routes, request handling, and application logic.</p><div class="tags"><span>Node.js</span><span>Express</span><span>REST API</span></div><div class="project-links"><a href="https://github.com/Bao992/taskforge-api" target="_blank" rel="noopener">View repository ↗</a></div></div>
+        </article>
+        <article class="project" data-category="live">
+          <div class="project-art"><div class="art-panel"><i></i><i></i><i></i><i></i></div><div class="art-code"><span>study()</span><br/>track.progress()<br/>build.consistency()</div></div>
+          <div class="project-body"><div class="project-top"><span class="project-type">Education · Web app</span><span class="status">LIVE DEMO</span></div><h3>Edu Habit Tracker</h3><p>A student-focused habit tracker designed to help users build productive study routines and maintain consistency.</p><div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div><div class="project-links"><a href="https://edu-habit-tracker-xrl5.vercel.app" target="_blank" rel="noopener">Open live app ↗</a><a class="secondary" href="https://github.com/Bao992/Edu-Habit-Tracker" target="_blank" rel="noopener">Source ↗</a></div></div>
+        </article>
+        <article class="project" data-category="live">
+          <div class="project-art"><div class="art-orbit"></div><div class="art-code"><span>trainingPlan</span><br/>→ personalised<br/>→ endurance<br/>→ performance</div></div>
+          <div class="project-body"><div class="project-top"><span class="project-type">Interactive web · Demo</span><span class="status">LIVE DEMO</span></div><h3>WorkoutFlow</h3><p>A landing page for an AI-generated personalised training plan concept, including an interactive JavaScript training calculator.</p><div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div><div class="project-links"><a href="https://workoutflow-three.vercel.app" target="_blank" rel="noopener">Open live app ↗</a><a class="secondary" href="https://github.com/Bao992/workoutflow" target="_blank" rel="noopener">Source ↗</a></div></div>
+        </article>
+        <article class="project" data-category="live">
+          <div class="project-art"><div class="art-panel"><i></i><i></i><i></i></div><div class="art-code"><span>care</span>.connect()<br/>patient → provider<br/>support → access</div></div>
+          <div class="project-body"><div class="project-top"><span class="project-type">Healthcare · Web platform</span><span class="status">LIVE DEMO</span></div><h3>MediDoor</h3><p>A healthcare platform frontend concept designed to connect patients with care providers and make access to services easier.</p><div class="tags"><span>Frontend</span><span>Web design</span><span>Healthcare</span></div><div class="project-links"><a href="https://medi-door-frontend.vercel.app" target="_blank" rel="noopener">Open live app ↗</a><a class="secondary" href="https://github.com/Bao992/MediDoor-Frontend" target="_blank" rel="noopener">Source ↗</a></div></div>
+        </article>
+      </div>
+      <p style="color:var(--soft);font:10px var(--mono);margin:20px 0 0">More experiments and code samples on <a style="color:var(--cyan)" href="https://github.com/Bao992" target="_blank" rel="noopener">GitHub ↗</a>.</p>
+    </div></section>
 
-        <div class="commit">
-          <div class="commit-head">
-            <span class="hash">#a3f9c12</span>
-            <span class="commit-msg">MediDoor — healthcare house-call &amp; emergency platform</span>
-          </div>
-          <div class="commit-meta">Author: Bao Kekana · personal project</div>
-          <p class="commit-body">
-            Connects patients to doctors and nurses for home visits, plus one-tap emergency requests
-            (police, fire, ambulance). Currently a full frontend; being extended into a working app with a Supabase backend.
-          </p>
-          <div class="diffstat"><span>React</span><span>Frontend</span><span>Supabase (in progress)</span></div>
-          <div class="commit-links">
-            <a href="https://medi-door-frontend.vercel.app" target="_blank" rel="noopener">live site</a>
-          </div>
+    <section id="agentic"><div class="container reveal">
+      <div class="section-head"><div><div class="eyebrow">03 / Where I'm exploring</div><h2>Moving beyond prompts.<br/><span class="gradient">Thinking in systems.</span></h2></div><p class="section-intro">I'm developing practical knowledge of agentic AI: how agents are instructed, equipped with tools, and coordinated to work toward a goal.</p></div>
+      <div class="agentic">
+        <div class="agent-panel"><div class="eyebrow">CURRENT LEARNING PATH</div><h3>Agentic AI & intelligent automation</h3><p>I'm exploring the building blocks of agentic systems and multi-agent workflows, including agent roles, tool and API use, orchestration, and the importance of human oversight.</p><p>This is an active learning area. I aim to turn these concepts into practical, testable applications and workflows.</p><div class="tags"><span>Agent roles</span><span>Tool use</span><span>API integration</span><span>Multi-agent workflows</span><span>Human verification</span></div></div>
+        <div class="agent-list">
+          <article class="agent-step"><span class="step">01</span><div><h4>Instruct & define roles</h4><p>Give agents clear objectives, context, constraints, and task-specific responsibilities.</p></div></article>
+          <article class="agent-step"><span class="step">02</span><div><h4>Connect tools & APIs</h4><p>Explore how agents can interact with external services and use tools to complete tasks.</p></div></article>
+          <article class="agent-step"><span class="step">03</span><div><h4>Coordinate workflows</h4><p>Understand how specialised agents can collaborate, hand off work, and contribute to a shared outcome.</p></div></article>
+          <article class="agent-step"><span class="step">04</span><div><h4>Evaluate & verify</h4><p>Keep human judgement in the loop and check whether generated findings and actions are reliable.</p></div></article>
         </div>
+      </div>
+    </div></section>
 
-        <div class="commit">
-          <div class="commit-head">
-            <span class="hash">#7e21d08</span>
-            <span class="commit-msg">Project Management Dashboard</span>
-          </div>
-          <div class="commit-meta">Author: Bao Kekana · Melsoft Academy — Company Project 2</div>
-          <p class="commit-body">
-            Frontend-only dashboard for tracking projects and tasks: stats overview, search/filter, task
-            statuses from To Do through Completed, controlled forms with validation, and lazy-loaded views.
-          </p>
-          <div class="diffstat"><span>React</span><span>TypeScript</span><span>Tailwind CSS</span><span>React Router</span></div>
-          <div class="commit-links">
-            <a href="https://github.com/Bao992" target="_blank" rel="noopener">github.com/Bao992</a>
-          </div>
-        </div>
+    <section id="skills"><div class="container reveal">
+      <div class="section-head"><div><div class="eyebrow">04 / Tools of the trade</div><h2>My current toolkit.</h2></div><p class="section-intro">Technologies I've worked with through coursework, projects, and ongoing practice. I'm always expanding this toolkit.</p></div>
+      <div class="skills-grid">
+        <article class="skill-card"><h3>Frontend engineering</h3><p>JavaScript · TypeScript · React · HTML · CSS · Tailwind CSS</p></article>
+        <article class="skill-card"><h3>Backend & data</h3><p>Node.js · Express.js · REST APIs · PostgreSQL · Supabase · SQL</p></article>
+        <article class="skill-card"><h3>Developer workflow</h3><p>Git · GitHub · Postman · VS Code · Vercel · Render</p></article>
+        <article class="skill-card"><h3>AI-assisted development</h3><p>ChatGPT · Claude · Cursor · Lovable · Prompting & AI-assisted debugging</p></article>
+        <article class="skill-card"><h3>Software practice</h3><p>Debugging · API checks · Code review · Validation · Technical documentation</p></article>
+        <article class="skill-card"><h3>Currently learning</h3><p>Agentic systems · Multi-agent workflows · AI automation · Software quality assurance</p><div class="learning-note">LEARNING IN PUBLIC / BUILDING THROUGH PRACTICE</div></article>
+      </div>
+    </div></section>
 
-        <div class="commit">
-          <div class="commit-head">
-            <span class="hash">#c58a331</span>
-            <span class="commit-msg">BMC Toolhire — business website redesign</span>
-          </div>
-          <div class="commit-meta">Author: Bao Kekana · Melsoft Academy — Company Project 1</div>
-          <p class="commit-body">
-            Full redesign of a real Limpopo tool-and-equipment rental business's website, done with direct
-            outreach to the company — researched their needs, then rebuilt the site around them.
-          </p>
-          <div class="diffstat"><span>React</span><span>Tailwind CSS</span><span>Client project</span></div>
-          <div class="commit-links">
-            <a href="https://github.com/Bao992" target="_blank" rel="noopener">github.com/Bao992</a>
-          </div>
-        </div>
+    <section id="journey"><div class="container reveal">
+      <div class="section-head"><div><div class="eyebrow">05 / The journey</div><h2>Learning with intention.</h2></div><p class="section-intro">A foundation in computer science, strengthened through practical software development and continuous exploration.</p></div>
+      <div class="timeline">
+        <article class="timeline-item"><div class="date">2026 — PRESENT</div><h3>Melsoft Academy</h3><p>AI-Augmented Full-Stack Developer Programme. Practical development, modern web technologies, and AI-assisted workflows.</p></article>
+        <article class="timeline-item"><div class="date">CURRENTLY COMPLETING</div><h3>UNISA · BSc Computer Science & Mathematics</h3><p>Final year · 336 of 360 NQF credits completed.</p></article>
+        <article class="timeline-item"><div class="date">2025</div><h3>Zaio Institute of Technology</h3><p>HTML Certificate.</p></article>
+        <article class="timeline-item"><div class="date">ONGOING</div><h3>Independent projects & collaboration</h3><p>Building applications, participating in team development, exploring AI agents, and learning through practical challenges.</p></article>
+      </div>
+    </div></section>
 
-        <div class="commit">
-          <div class="commit-head">
-            <span class="hash">#019bf44</span>
-            <span class="commit-msg">WorkoutFlow — AI training plan landing page</span>
-          </div>
-          <div class="commit-meta">Author: Bao Kekana · timed technical assessment</div>
-          <p class="commit-body">
-            Landing page for an AI-generated personalised training plan app, built for endurance athletes —
-            includes a live JavaScript training calculator, built and deployed under time pressure.
-          </p>
-          <div class="diffstat"><span>HTML/CSS/JS</span><span>Timed build</span></div>
-          <div class="commit-links">
-            <a href="https://workoutflow-three.vercel.app" target="_blank" rel="noopener">live site</a>
-          </div>
-        </div>
-
-        <div class="commit">
-          <div class="commit-head">
-            <span class="hash">#5d0c771</span>
-            <span class="commit-msg">Edu Habit Tracker</span>
-          </div>
-          <div class="commit-meta">Author: Bao Kekana · personal project</div>
-          <p class="commit-body">
-            A habit-tracking app built to reinforce study routines — practical, self-directed build outside coursework.
-          </p>
-          <div class="diffstat"><span>React</span></div>
-          <div class="commit-links">
-            <a href="https://edu-habit-tracker-xrl5.vercel.app" target="_blank" rel="noopener">live site</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- EDUCATION -->
-      <section id="education">
-        <div class="cmd"><span class="prompt">bao@dev</span>:<span class="path">~</span>$ <span class="arg">cat education.txt</span></div>
-        <h2 class="sec">education &amp; training</h2>
-
-        <div class="edu-item">
-          <div class="title">BSc Computer Science &amp; Mathematics — UNISA</div>
-          <div class="sub">Final year · 336 of 360 NQF credits complete · finishing Complex Analysis &amp; Philosophy of Science</div>
-        </div>
-        <div class="edu-item">
-          <div class="title">AI Fullstack Engineering Program — Melsoft Academy</div>
-          <div class="sub">In progress, 2026</div>
-        </div>
-        <div class="edu-item">
-          <div class="title">Advanced HTML Certificate (NQF Level 5) — ZAIO Institute</div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section id="contact">
-        <div class="cmd"><span class="prompt">bao@dev</span>:<span class="path">~</span>$ <span class="arg">cat contact.txt</span></div>
-        <h2 class="sec">contact</h2>
-        <div class="contact-lines">
-          <div><span class="k">email</span><a href="mailto:bao.kekana@icloud.com">bao.kekana@icloud.com</a></div>
-          <div><span class="k">phone</span><span>069 187 4414</span></div>
-          <div><span class="k">github</span><a href="https://github.com/Bao992" target="_blank" rel="noopener">github.com/Bao992</a></div>
-          <div><span class="k">linkedin</span><a href="https://www.linkedin.com/in/bao-kekana-080a40322" target="_blank" rel="noopener">linkedin.com/in/bao-kekana</a></div>
-        </div>
-      </section>
-
-      <footer>// end of log — thanks for reading</footer>
-    </div>
-  </div>
-</div>
-
+    <section id="contact"><div class="container reveal">
+      <div class="contact-box"><div><div class="eyebrow">06 / Start a conversation</div><h2>Have a problem worth<br/><span class="gradient">building for?</span></h2><p>I'm open to junior developer roles, internships, AI-focused opportunities, and collaborations. If you're building something meaningful, I'd like to hear about it.</p></div><div class="contact-actions"><a class="btn btn-primary" href="mailto:bao.kekana@icloud.com">Email me ↗</a><a class="btn btn-ghost" href="https://www.linkedin.com/in/bao-kekana-080a40322/" target="_blank" rel="noopener">LinkedIn ↗</a><a class="btn btn-ghost" href="https://github.com/Bao992" target="_blank" rel="noopener">GitHub ↗</a></div></div>
+    </div></section>
+  </main>
+  <footer class="container footer"><span>© 2026 Bao Kekana · BAO AI LAB</span><span>Designed with curiosity. Built with intention. <a href="#top">Back to top ↑</a></span></footer>
+  <script>
+    const menuBtn=document.getElementById('menuBtn');const navLinks=document.getElementById('navLinks');
+    menuBtn.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));menuBtn.textContent=open?'✕':'☰'});
+    navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navLinks.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='☰'}));
+    const filters=document.querySelectorAll('.filter');const projects=document.querySelectorAll('.project');
+    filters.forEach(button=>button.addEventListener('click',()=>{filters.forEach(b=>b.classList.remove('active'));button.classList.add('active');const filter=button.dataset.filter;projects.forEach(project=>{project.hidden=filter!=='all'&&!project.dataset.category.split(' ').includes(filter)})}));
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.08});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  </script>
 </body>
 </html>
