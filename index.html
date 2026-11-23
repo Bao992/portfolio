@@ -81,6 +81,7 @@
     .agent-detail-cell:nth-child(n+3){border-top:1px solid var(--line)}
     .agent-detail-cell h5{font:9px var(--mono);letter-spacing:.1em;color:var(--cyan);margin:0 0 7px;text-transform:uppercase}
     .agent-detail-cell p,.agent-detail-cell li{font-size:10px;line-height:1.55;color:var(--muted);margin:0}
+    .agent-detail-cell p{white-space:pre-wrap;overflow-wrap:anywhere}.command-agent .agent-task{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
     .agent-detail-cell ul{margin:0;padding-left:15px;display:grid;gap:3px}
     .agent-history{display:grid;gap:5px;max-height:90px;overflow:auto}
     .agent-history span{font:9px var(--mono);color:#b9c8dc}
@@ -552,8 +553,10 @@
           card.classList.remove('active');card.classList.add('done');card.querySelector('.agent-status').textContent='COMPLETE';
           card.querySelector('.agent-task').textContent=step.result;
           profile.assignment=step.result;profile.history.push(step.status+' · '+new Date().toLocaleTimeString());
-          profile.messages.push('Byte → '+step.agent+': Assignment completed.');profile.messages.push(step.agent+' → Byte: '+step.result);
-          addCommandTextEvent(step.agent,step.result);
+          const preview=step.result.replace(/\s+/g,' ').trim();
+          profile.messages.push('Byte → '+step.agent+': Assignment completed.');
+          profile.messages.push(step.agent+' → Byte: '+(preview.length>220?preview.slice(0,217)+'…':preview));
+          addCommandTextEvent(step.agent,preview.length>240?preview.slice(0,237)+'…':preview);
           renderAgentWorkspace(index);
         });
         commandOutcomeTitle.textContent='READY FOR HUMAN REVIEW';
