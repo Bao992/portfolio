@@ -35,7 +35,7 @@ ${portfolioFacts}`;
 
   try {
     const reply = await generateText(system, message, 420);
-    return res.status(200).json({ reply, agent: "Byte", model: process.env.GEMINI_MODEL || "gemini-3.8-flash" });
+    return res.status(200).json({ reply, agent: "Byte", model: process.env.GEMINI_MODEL || "gemini-3.5-flash-lite" });
   } catch (error) {
     if (error.code === "AI_NOT_CONFIGURED") {
       return res.status(503).json({ error: "Byte's AI connection is not configured yet. Add GEMINI_API_KEY to the Vercel project environment variables." });
