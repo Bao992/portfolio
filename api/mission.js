@@ -1,5 +1,5 @@
 const { generateText, checkRateLimit, getClientKey, isSameSiteRequest } = require("../lib/gemini");
-const { inspectMissionInput, checkPlanQuality, auditAnalysisEvidence, verifyMissionOutputs } = require("../lib/mission-tools");
+const { inspectMissionInput, checkPlanQuality, auditAnalysisEvidence, verifyAgentReports } = require("../lib/mission-tools");
 
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
@@ -44,7 +44,7 @@ module.exports = async function handler(req, res) {
     );
 
     const verifier = verifierResult.text;
-    const outputAudit = verifyMissionOutputs({ plan: planner, analysis: analyst, verification: verifier, planAudit, evidenceAudit });
+    const outputAudit = verifyAgentReports({ plan: planner, analysis: analyst, verification: verifier, planAudit, evidenceAudit });
     return res.status(200).json({
       mission: task,
       model: [...new Set([plannerResult.model, analystResult.model, verifierResult.model])].join(", "),
