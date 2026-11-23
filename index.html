@@ -547,7 +547,7 @@
         else if(tool.tool==='check_plan_structure') detail.textContent='Sections found: '+tool.sectionsFound.join(', ')+' · Missing: '+(tool.missingSections.join(', ')||'None')+' · Action items: '+tool.actionItemsFound;
         else if(tool.tool==='audit_analysis_evidence') detail.textContent='Numeric claims checked: '+tool.numbersFoundInAnalysis.length+' · Unsupported numeric claims: '+(tool.unsupportedNumericClaims.join(', ')||'None')+'. '+tool.note;
         else if(tool.tool==='verify_mission_outputs') detail.textContent=tool.passedCount+'/'+tool.totalChecks+' checks passed. '+tool.checks.filter(item=>!item.passed).map(item=>item.name).join('; ');
-        else if(tool.tool==='plan_validation_attempt') detail.textContent='Attempt '+tool.attempt+' · '+(tool.passed?'Required structure passed':'Missing: '+(tool.missingSections.join(', ')||'None')+' · Action items: '+tool.actionItemsFound);
+        else if(tool.tool==='plan_validation_attempt') detail.textContent='Attempt '+tool.attempt+' · '+(tool.passed?'Required structure passed':'Missing: '+(tool.missingSections.join(', ')||'None')+' · Action items: '+tool.actionItemsFound)+((tool.validationIssues&&tool.validationIssues.length)?' · '+tool.validationIssues.join(' '):'');
         else if(tool.tool==='planner_correction_and_gate') detail.textContent='Planner correction '+(tool.passed?'passed':'failed')+'. '+tool.note;
         card.append(detail);missionToolResults.append(card);
       });
