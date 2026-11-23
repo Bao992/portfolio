@@ -5,6 +5,7 @@
 - `POST /api/agent` powers Byte's portfolio Q&A.
 - `POST /api/mission` runs three sequential Gemini calls: Thabo plans, Lerato analyses the supplied information and Thabo’s plan, and Kabelo reviews both outputs.
 - `lib/mission-tools.js` provides deterministic checks used during each mission: input inspection, plan structure validation, a limited numeric-claim comparison, and report-quality gates. These checks are ordinary JavaScript functions, not AI agents. They are surfaced in Mission Control as tool results.
+- Before Lerato is called, Thabo's plan is checked for four required headings and at least two numbered/action items. If it fails, the API makes one correction call with the validation feedback, then checks again. If the corrected plan still fails, the mission returns `BLOCKED` and Lerato and Kabelo are not called. Mission Control displays the attempts and blocked handoff.
 - The Gemini key is read only by server-side functions in `api/` and `lib/`. Never place it in browser JavaScript or commit a real key.
 
 ## Create a Gemini API key
