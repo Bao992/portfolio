@@ -57,6 +57,38 @@
     .command-agent.active .agent-status{color:var(--cyan);background:rgba(110,231,249,.09)}
     .command-agent.done .agent-status{color:var(--green);background:rgba(140,232,189,.08)}
     .command-agent .agent-task{font-size:9px;color:#b7c5d9;line-height:1.5;margin:10px 0 0;min-height:40px}
+    .command-agent{cursor:pointer;text-align:left;font:inherit;color:inherit}
+    .command-agent:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+    .command-agent.selected{border-color:rgba(110,231,249,.48);background:rgba(110,231,249,.045)}
+    .command-agent.selected:after{content:"WORKSPACE OPEN";display:block;margin-top:10px;color:var(--cyan);font:8px var(--mono);letter-spacing:.06em}
+    .agent-detail{margin-top:16px;border:1px solid rgba(110,231,249,.2);border-radius:12px;background:linear-gradient(145deg,rgba(10,19,32,.9),rgba(14,18,34,.85));overflow:hidden}
+    .agent-detail-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 15px;border-bottom:1px solid var(--line)}
+    .agent-detail-heading{display:flex;align-items:center;gap:10px;min-width:0}
+    .agent-detail-monogram{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:rgba(110,231,249,.1);color:var(--cyan);font:600 11px var(--mono)}
+    .agent-detail-heading b{display:block;font:600 12px var(--display)}
+    .agent-detail-heading small{display:block;color:var(--soft);font:8px var(--mono);margin-top:2px}
+    .agent-detail-state{font:8px var(--mono);color:var(--green);white-space:nowrap}
+    .agent-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+    .agent-detail-cell{padding:13px 15px;min-width:0}
+    .agent-detail-cell:nth-child(odd){border-right:1px solid var(--line)}
+    .agent-detail-cell:nth-child(n+3){border-top:1px solid var(--line)}
+    .agent-detail-cell h5{font:9px var(--mono);letter-spacing:.1em;color:var(--cyan);margin:0 0 7px;text-transform:uppercase}
+    .agent-detail-cell p,.agent-detail-cell li{font-size:10px;line-height:1.55;color:var(--muted);margin:0}
+    .agent-detail-cell ul{margin:0;padding-left:15px;display:grid;gap:3px}
+    .agent-history{display:grid;gap:5px;max-height:90px;overflow:auto}
+    .agent-history span{font:9px var(--mono);color:#b9c8dc}
+    .agent-chat{padding:13px 15px;border-top:1px solid var(--line)}
+    .agent-chat-title{font:9px var(--mono);letter-spacing:.1em;color:var(--cyan);text-transform:uppercase;margin-bottom:8px}
+    .agent-chat-log{display:grid;gap:6px;max-height:100px;overflow:auto;margin-bottom:9px}
+    .agent-chat-message{font-size:9px;line-height:1.45;color:#c1d0e4;padding:6px 8px;border-radius:7px;background:rgba(255,255,255,.035)}
+    .agent-chat-message b{color:#f0f6ff}
+    .agent-chat-form{display:flex;gap:7px}
+    .agent-chat-form input{min-width:0;flex:1;border:1px solid var(--line);border-radius:7px;background:rgba(255,255,255,.035);color:var(--text);padding:8px 9px;font:10px var(--sans)}
+    .agent-chat-form input:focus{outline:1px solid var(--cyan);border-color:var(--cyan)}
+    .agent-chat-form button{border:1px solid rgba(110,231,249,.28);border-radius:7px;background:rgba(110,231,249,.09);color:var(--cyan);padding:0 11px;font:9px var(--mono);cursor:pointer}
+    .agent-chat-note{font:8px var(--mono);color:var(--soft);margin-top:7px}
+    @media(max-width:560px){.agent-detail-grid{grid-template-columns:1fr}.agent-detail-cell:nth-child(odd){border-right:0}.agent-detail-cell:nth-child(n+2){border-top:1px solid var(--line)}}
+
     .command-side{padding:22px;background:rgba(255,255,255,.012)}
     .command-side-block+.command-side-block{margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
     .command-activity{display:grid;gap:12px;margin-top:13px}
@@ -282,9 +314,19 @@
             <div class="command-section-label">Active mission / 001</div>
             <div class="command-mission"><div><h3>School meal-plan review</h3><p>Coordinate a three-agent workflow to identify a possible meal-item shortage and prepare it for human review.</p></div><button class="command-run" id="commandRun" type="button">▶ Run mission</button></div>
             <div class="command-agents">
-              <article class="command-agent" data-agent="0"><div class="command-avatar">TH</div><h4>Thabo</h4><span class="role">PLANNER · STRATEGY</span><span class="agent-status">STANDBY</span><p class="agent-task">Waiting to break the request into clear checks.</p></article>
-              <article class="command-agent" data-agent="1"><div class="command-avatar">LE</div><h4>Lerato</h4><span class="role">NUTRITION ANALYST</span><span class="agent-status">STANDBY</span><p class="agent-task">Waiting to compare quantities and identify gaps.</p></article>
-              <article class="command-agent" data-agent="2"><div class="command-avatar">KA</div><h4>Kabelo</h4><span class="role">VERIFIER · QUALITY</span><span class="agent-status">STANDBY</span><p class="agent-task">Waiting to verify the finding and prepare a handoff.</p></article>
+              <button class="command-agent selected" type="button" data-agent="0" aria-pressed="true"><div class="command-avatar">TH</div><h4>Thabo</h4><span class="role">PLANNER · STRATEGY</span><span class="agent-status">STANDBY</span><p class="agent-task">Waiting to break the request into clear checks.</p></button>
+              <button class="command-agent" type="button" data-agent="1" aria-pressed="false"><div class="command-avatar">LE</div><h4>Lerato</h4><span class="role">NUTRITION ANALYST</span><span class="agent-status">STANDBY</span><p class="agent-task">Waiting to compare quantities and identify gaps.</p></button>
+              <button class="command-agent" type="button" data-agent="2" aria-pressed="false"><div class="command-avatar">KA</div><h4>Kabelo</h4><span class="role">VERIFIER · QUALITY</span><span class="agent-status">STANDBY</span><p class="agent-task">Waiting to verify the finding and prepare a handoff.</p></button>
+            </div>
+            <div class="agent-detail" id="agentDetail" aria-live="polite">
+              <div class="agent-detail-head"><div class="agent-detail-heading"><span class="agent-detail-monogram" id="agentDetailMonogram">TH</span><span><b id="agentDetailName">Thabo · Planner</b><small id="agentDetailRole">STRATEGY &amp; TASK DESIGN</small></span></div><span class="agent-detail-state" id="agentDetailState">AVAILABLE</span></div>
+              <div class="agent-detail-grid">
+                <div class="agent-detail-cell"><h5>Personality</h5><p id="agentPersonality">Calm, organised and strategic. Thabo likes turning broad requests into clear, manageable steps.</p></div>
+                <div class="agent-detail-cell"><h5>Tools &amp; strengths</h5><ul id="agentTools"><li>Task breakdown</li><li>Workflow mapping</li><li>Priority setting</li></ul></div>
+                <div class="agent-detail-cell"><h5>Task history</h5><div class="agent-history" id="agentHistory"><span>• No mission activity yet</span></div></div>
+                <div class="agent-detail-cell"><h5>Current assignment</h5><p id="agentAssignment">Waiting to receive a mission from Byte.</p></div>
+              </div>
+              <div class="agent-chat"><div class="agent-chat-title">Communication channel</div><div class="agent-chat-log" id="agentChatLog"><div class="agent-chat-message"><b>Byte → Thabo:</b> Stand by for the next assignment.</div></div><form class="agent-chat-form" id="agentChatForm"><input id="agentChatInput" maxlength="120" placeholder="Write a note to this agent…" aria-label="Write a note to the selected agent"/><button type="submit">SEND ↗</button></form><div class="agent-chat-note">LOCAL DEMO CHANNEL · NOTES ARE DISPLAYED, NOT SENT TO A LIVE AI AGENT</div></div>
             </div>
           </div>
           <aside class="command-side">
@@ -405,10 +447,37 @@
     byteDemoLaunch.addEventListener('click',runByteDemo);
     const commandRun=document.getElementById('commandRun'),commandAgents=[...document.querySelectorAll('.command-agent')],commandActivity=document.getElementById('commandActivity'),commandOutcomeTitle=document.getElementById('commandOutcomeTitle'),commandOutcome=document.getElementById('commandOutcome');
     let commandTimer=null;
+    const agentDetailMonogram=document.getElementById('agentDetailMonogram'),agentDetailName=document.getElementById('agentDetailName'),agentDetailRole=document.getElementById('agentDetailRole'),agentDetailState=document.getElementById('agentDetailState'),agentPersonality=document.getElementById('agentPersonality'),agentTools=document.getElementById('agentTools'),agentHistory=document.getElementById('agentHistory'),agentAssignment=document.getElementById('agentAssignment'),agentChatLog=document.getElementById('agentChatLog'),agentChatForm=document.getElementById('agentChatForm'),agentChatInput=document.getElementById('agentChatInput');
+    const agentProfiles=[
+      {initials:'TH',name:'Thabo · Planner',role:'STRATEGY & TASK DESIGN',personality:'Calm, organised and strategic. Thabo likes turning broad requests into clear, manageable steps.',tools:['Task breakdown','Workflow mapping','Priority setting'],assignment:'Waiting to receive a mission from Byte.',history:[],messages:['Byte → Thabo: Stand by for the next assignment.']},
+      {initials:'LE',name:'Lerato · Nutrition Analyst',role:'DATA REVIEW & NUTRITION ANALYSIS',personality:'Curious, sharp and detail-focused. Lerato asks questions of the numbers and looks for patterns others might miss.',tools:['Quantity comparison','Gap identification','Data interpretation'],assignment:'Waiting for a structured task and relevant meal information.',history:[],messages:['Byte → Lerato: Prepare to review the meal quantities.']},
+      {initials:'KA',name:'Kabelo · Verifier',role:'QUALITY & HUMAN HANDOFF',personality:'Careful, steady and thorough. Kabelo checks the reasoning, highlights uncertainty and prepares work for human review.',tools:['Consistency checks','Finding verification','Review handoff'],assignment:'Waiting for a finding to verify before it reaches a person.',history:[],messages:['Byte → Kabelo: Stand by to verify the team’s findings.']}
+    ];
+    let selectedAgent=0;
+    function renderAgentWorkspace(index){
+      selectedAgent=index;const profile=agentProfiles[index],card=commandAgents[index];
+      commandAgents.forEach((item,i)=>{item.classList.toggle('selected',i===index);item.setAttribute('aria-pressed',String(i===index))});
+      agentDetailMonogram.textContent=profile.initials;agentDetailName.textContent=profile.name;agentDetailRole.textContent=profile.role;
+      agentDetailState.textContent=card.querySelector('.agent-status').textContent;
+      agentPersonality.textContent=profile.personality;agentTools.innerHTML='';
+      profile.tools.forEach(tool=>{const li=document.createElement('li');li.textContent=tool;agentTools.append(li)});
+      agentHistory.innerHTML='';
+      (profile.history.length?profile.history:['No mission activity yet']).forEach(item=>{const line=document.createElement('span');line.textContent='• '+item;agentHistory.append(line)});
+      agentAssignment.textContent=profile.assignment;
+      agentChatLog.innerHTML='';
+      profile.messages.forEach(message=>{const line=document.createElement('div');line.className='agent-chat-message';line.textContent=message;agentChatLog.append(line)});
+    }
+    commandAgents.forEach((agent,index)=>agent.addEventListener('click',()=>renderAgentWorkspace(index)));
+    agentChatForm.addEventListener('submit',event=>{
+      event.preventDefault();const note=agentChatInput.value.trim();if(!note)return;
+      const profile=agentProfiles[selectedAgent];profile.messages.push('You → '+profile.name.split(' · ')[0]+': '+note);
+      renderAgentWorkspace(selectedAgent);agentChatInput.value='';
+    });
+
     const commandSteps=[
-      {agent:0,status:'PLANNING',task:'Splitting the request into menu, quantity, and availability checks.',event:'<b>Thabo · Planner:</b> Task mapped into three checks. Handing the quantities review to Lerato.',outcome:'TASK STRUCTURED'},
-      {agent:1,status:'ANALYSING',task:'Comparing planned meal quantities and flagging a possible shortfall.',event:'<b>Lerato · Analyst:</b> A possible shortage has been identified. Sending the finding to Kabelo for verification.',outcome:'POTENTIAL GAP FLAGGED'},
-      {agent:2,status:'VERIFYING',task:'Checking the flagged result and preparing a human-review handoff.',event:'<b>Kabelo · Verifier:</b> Finding checked. Preparing a concise handoff for human review.',outcome:'VERIFICATION COMPLETE'}
+      {agent:0,status:'PLANNING',task:'Splitting the request into menu, quantity, and availability checks.',event:'<b>Thabo · Planner:</b> Task mapped into three checks. Handing the quantities review to Lerato.',outcome:'TASK STRUCTURED',history:'Mapped the mission into three checks.',assignment:'Break the meal-plan request into menu, quantity and availability checks.'},
+      {agent:1,status:'ANALYSING',task:'Comparing planned meal quantities and flagging a possible shortfall.',event:'<b>Lerato · Analyst:</b> A possible shortage has been identified. Sending the finding to Kabelo for verification.',outcome:'POTENTIAL GAP FLAGGED',history:'Compared quantities and flagged a possible shortage.',assignment:'Compare the meal quantities and pass any potential gap to Kabelo.'},
+      {agent:2,status:'VERIFYING',task:'Checking the flagged result and preparing a human-review handoff.',event:'<b>Kabelo · Verifier:</b> Finding checked. Preparing a concise handoff for human review.',outcome:'VERIFICATION COMPLETE',history:'Checked the flagged finding and prepared a review handoff.',assignment:'Check the reported shortage and prepare a clear handoff for a human decision.'}
     ];
     function addCommandEvent(html,current=false){
       const item=document.createElement('div');item.className='command-event'+(current?' current':'');
@@ -422,7 +491,10 @@
         agent.classList.remove('active','done');
         agent.querySelector('.agent-status').textContent='STANDBY';
         agent.querySelector('.agent-task').textContent=['Waiting to break the request into clear checks.','Waiting to compare quantities and identify gaps.','Waiting to verify the finding and prepare a handoff.'][i];
+        agentProfiles[i].history=[];agentProfiles[i].assignment=['Waiting to receive a mission from Byte.','Waiting for a structured task and relevant meal information.','Waiting for a finding to verify before it reaches a person.'][i];
+        agentProfiles[i].messages=[['Byte → Thabo: Stand by for the next assignment.'],['Byte → Lerato: Prepare to review the meal quantities.'],['Byte → Kabelo: Stand by to verify the team’s findings.'][i]];
       });
+      renderAgentWorkspace(selectedAgent);
       commandActivity.innerHTML='';
       addCommandEvent('<b>Byte:</b> Team is standing by. Start the mission to see the handoffs.',true);
       commandOutcomeTitle.textContent='AWAITING EXECUTION';
@@ -436,7 +508,7 @@
       commandOutcome.textContent='The crew is working through the task in sequence.';
       let index=0;
       function next(){
-        if(index>0){const previous=commandAgents[index-1];previous.classList.remove('active');previous.classList.add('done');previous.querySelector('.agent-status').textContent='COMPLETE'}
+        if(index>0){const previous=commandAgents[index-1];previous.classList.remove('active');previous.classList.add('done');previous.querySelector('.agent-status').textContent='COMPLETE';if(selectedAgent===index-1)renderAgentWorkspace(index-1)}
         if(index===commandSteps.length){
           addCommandEvent('<b>Byte:</b> All handoffs complete. A person should review the flagged item before any decision is made.');
           commandOutcomeTitle.textContent='READY FOR HUMAN REVIEW';
@@ -446,6 +518,7 @@
         const step=commandSteps[index],agent=commandAgents[step.agent];
         agent.classList.add('active');agent.querySelector('.agent-status').textContent=step.status;
         agent.querySelector('.agent-task').textContent=step.task;
+        const profile=agentProfiles[step.agent];profile.history.push(step.history);profile.assignment=step.assignment;profile.messages.push('Byte → '+profile.name.split(' · ')[0]+': '+step.task);if(selectedAgent===step.agent)renderAgentWorkspace(step.agent);
         addCommandEvent(step.event,true);commandOutcomeTitle.textContent=step.outcome;
         commandOutcome.textContent=step.task;
         index++;commandTimer=setTimeout(next,1900);
