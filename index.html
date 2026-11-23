@@ -34,6 +34,17 @@
     .welcome-bubble{position:relative;max-width:250px;padding:12px 34px 12px 14px;border:1px solid rgba(110,231,249,.35);border-radius:13px 13px 3px 13px;background:rgba(12,20,34,.97);box-shadow:0 12px 34px #0007,0 0 24px rgba(110,231,249,.1);color:#eaf6ff;font-size:11px;line-height:1.5;opacity:0;transform:translateY(9px);transition:opacity .25s,transform .25s}
     .welcome-bubble.show{opacity:1;transform:translateY(0)}
     .welcome-bubble strong{display:block;color:var(--cyan);font:10px var(--mono);letter-spacing:.08em;margin-bottom:4px}.bot-message{display:block}.bot-toggle{border:0;background:transparent;padding:0;cursor:pointer;line-height:0}.bot-toggle:focus-visible,.bot-dismiss:focus-visible{outline:2px solid var(--cyan);outline-offset:4px;border-radius:10px}.bot-dismiss{position:absolute;right:8px;top:7px;border:0;background:transparent;color:var(--soft);font-size:16px;cursor:pointer;padding:0 4px}.bot-dismiss:hover{color:var(--cyan)}
+    .welcome-bubble{width:min(320px,calc(100vw - 28px));max-width:320px;padding:14px 34px 13px 14px}
+    .byte-quick{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+    .byte-quick button,.byte-action{border:1px solid rgba(110,231,249,.2);border-radius:7px;background:rgba(110,231,249,.06);color:#ccecf5;padding:6px 8px;font:9px var(--mono);cursor:pointer}
+    .byte-quick button:hover,.byte-action:hover{border-color:var(--cyan);color:var(--cyan)}
+    .byte-ask{display:flex;gap:6px;margin-top:9px}
+    .byte-ask input{min-width:0;flex:1;border:1px solid var(--line);border-radius:7px;background:rgba(255,255,255,.04);color:var(--text);padding:8px;font:10px var(--sans);outline:none}
+    .byte-ask input:focus{border-color:rgba(110,231,249,.6)}
+    .byte-ask input::placeholder{color:var(--soft)}
+    .byte-ask button{width:31px;border:0;border-radius:7px;background:linear-gradient(110deg,var(--cyan),#a5c1ff);color:#071019;font-weight:700;cursor:pointer}
+    .byte-action{margin-top:9px;color:var(--cyan)}
+    @media(max-width:620px){.welcome-bubble{width:min(290px,calc(100vw - 24px));max-width:290px}.byte-quick button{font-size:8px}}
     .robot-mascot{width:108px;height:132px;overflow:visible;filter:drop-shadow(0 10px 18px rgba(0,0,0,.4));animation:robot-enter .7s cubic-bezier(.2,.8,.2,1) both}
     .robot-arm{transform-box:view-box;transform-origin:96px 86px;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
     .robot-mascot.waving .robot-arm{animation:robot-wave .55s ease-in-out 3}
@@ -85,7 +96,7 @@
           <div class="agent-row"><span class="agent-icon">03</span><span class="agent-text"><b>Verify</b><small>QUALITY & RELIABILITY</small></span><span class="agent-state">FOCUS</span></div>
         </div>
         <div class="welcome-bot" id="welcomeBot" aria-label="Byte, your BAO AI LAB portfolio guide">
-          <div class="welcome-bubble show" id="botBubble" role="status" aria-live="polite"><button class="bot-dismiss" id="botDismiss" type="button" aria-label="Dismiss Byte message">×</button><strong>BYTE · YOUR PORTFOLIO GUIDE</strong><span class="bot-message" id="botMessage">Hey there! 👋 Welcome to BAO AI LAB. I can show you around.</span></div>
+          <div class="welcome-bubble show" id="botBubble" role="status" aria-live="polite"><button class="bot-dismiss" id="botDismiss" type="button" aria-label="Dismiss Byte message">×</button><strong>BYTE · YOUR PORTFOLIO GUIDE</strong><span class="bot-message" id="botMessage">Hey there! 👋 Welcome to BAO AI LAB. I'm your guide around here. Ask me anything about Bao's work.</span><div class="byte-quick" id="byteQuick"><button type="button" data-byte-question="Who is Bao?">Who is Bao?</button><button type="button" data-byte-question="Show me the AI projects">AI projects</button><button type="button" data-byte-question="Tell me about FixFlow">What is FixFlow?</button><button type="button" data-byte-question="How can I contact Bao?">Contact Bao</button></div><form class="byte-ask" id="byteAsk"><input id="byteInput" type="text" maxlength="160" placeholder="Ask Byte a question..." aria-label="Ask Byte a question" autocomplete="off"/><button type="submit" aria-label="Send question">↗</button></form><button class="byte-action" id="byteAction" type="button" hidden>Explore this section ↗</button></div>
           <div class="handover-card" id="handoverCard" aria-hidden="true"><span class="handover-icon" id="handoverIcon">↗</span><span class="handover-copy"><b id="handoverTitle">Your next stop</b><small id="handoverSub">OPENING LINK</small></span></div>
           <button class="bot-toggle" id="botToggle" type="button" aria-label="Ask Byte for a tour" aria-expanded="true"><svg class="robot-mascot waving" id="robotMascot" viewBox="0 0 140 160" role="img" aria-label="Byte, a friendly robot waving hello">
             <defs><linearGradient id="botShell" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e4f5ff"/><stop offset=".5" stop-color="#8fa9c9"/><stop offset="1" stop-color="#425675"/></linearGradient><linearGradient id="botFace" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14283e"/><stop offset="1" stop-color="#091522"/></linearGradient><linearGradient id="botGlow"><stop stop-color="#8df4ff"/><stop offset="1" stop-color="#789dff"/></linearGradient></defs>
@@ -205,7 +216,10 @@
     const bot=document.getElementById('robotMascot'),bubble=document.getElementById('botBubble'),handover=document.getElementById('handoverCard');
     const botMessage=document.getElementById('botMessage'),botToggle=document.getElementById('botToggle'),botDismiss=document.getElementById('botDismiss');
     const handoverTitle=document.getElementById('handoverTitle'),handoverSub=document.getElementById('handoverSub'),handoverIcon=document.getElementById('handoverIcon');
-    let botTimer,botHidden=false,currentSection='top';
+    const byteAsk=document.getElementById('byteAsk'),byteInput=document.getElementById('byteInput'),byteQuick=document.getElementById('byteQuick'),byteAction=document.getElementById('byteAction');
+    let botTimer,botHidden=false,currentSection='top',byteDestination='';
+    let botActionLabel='';
+
     const byteMessages={
       top:"Hey there! 👋 I'm Byte. Welcome to Bao's digital workshop. Want a quick tour?",
       about:"A little about the human behind the keyboard: Bao is a Computer Science and Mathematics student who learns by building.",
@@ -218,8 +232,38 @@
     function showByte(message,autoHide=true){
       clearTimeout(botTimer);botMessage.textContent=message;bubble.classList.add('show');botToggle.setAttribute('aria-expanded','true');
       bot.classList.remove('handing');bot.classList.add('waving');
+      byteAction.hidden=!byteDestination;byteAction.textContent=botActionLabel||'Explore this section ↗';
       if(autoHide)botTimer=setTimeout(()=>{bubble.classList.remove('show');botToggle.setAttribute('aria-expanded','false')},6500);
     }
+    const byteAnswers=[
+      {match:/who is bao|about bao|tell me about bao|who.*behind/i,message:"Bao is an emerging AI and full-stack developer, and a Computer Science and Mathematics student at UNISA. He learns by building practical products, collaborating, and solving real problems.",section:'about',label:'Meet Bao'},
+      {match:/fixflow|property|maintenance/i,message:"FixFlow is Bao's PropTech product concept. It focuses on the full maintenance journey: tenant requests, manager triage, contractor coordination, approvals, progress tracking and verified resolution.",section:'work',label:'Explore FixFlow'},
+      {match:/nutritrack|school nutrition|multi.agent|ai project|agentic project/i,message:"NutriTrack is a school nutrition colleague concept exploring multi-agent workflows. Bao has scaffolded the app, built API routes and tested meal-calculation logic. FixFlow also explores intelligent workflows in property operations.",section:'work',label:'See the projects'},
+      {match:/skill|technology|tech stack|toolkit|what can bao build/i,message:"Bao has worked with JavaScript, TypeScript, React, HTML, CSS, Node.js, Express, PostgreSQL, Supabase and Git. He's currently growing his practical skills in agentic AI and automation.",section:'skills',label:'View capabilities'},
+      {match:/contact|hire|work with|connect|email/i,message:"Great idea. Bao is open to junior developer roles, internships, AI-focused opportunities and collaborations. You can reach him by email or connect on LinkedIn.",section:'contact',label:'Contact Bao'},
+      {match:/study|education|unisa|degree|melsoft|journey/i,message:"Bao is completing a BSc in Computer Science and Mathematics at UNISA and is also part of the Melsoft Academy AI-Augmented Full-Stack Developer programme.",section:'journey',label:'See the journey'},
+      {match:/ai|agent|automation/i,message:"Bao is actively learning how agents use tools and APIs, coordinate specialised tasks, and verify their work. He is building practical experience through projects rather than claiming to be an AI expert already.",section:'agentic',label:'Explore agentic AI'}
+    ];
+    function answerByte(question){
+      const match=byteAnswers.find(item=>item.match.test(question));
+      byteDestination=match?match.section:'';
+      botActionLabel=match?match.label:'';
+      showByte(match?match.message:"Good question! I'm still learning my tour guide duties. Try asking about Bao, his projects, skills, AI interests or how to contact him.",false);
+      bot.classList.remove('handing');bot.classList.add('waving');
+    }
+    function askByte(question){
+      const clean=question.trim();if(!clean)return;
+      botHidden=false;answerByte(clean);byteInput.value='';
+    }
+    byteQuick.addEventListener('click',event=>{
+      const button=event.target.closest('[data-byte-question]');if(button)askByte(button.dataset.byteQuestion);
+    });
+    byteAsk.addEventListener('submit',event=>{event.preventDefault();askByte(byteInput.value)});
+    byteAction.addEventListener('click',()=>{
+      if(!byteDestination)return;
+      const target=document.getElementById(byteDestination);
+      if(target){target.scrollIntoView({behavior:'smooth',block:'start'});currentSection=byteDestination;showByte(byteMessages[byteDestination]||byteMessages.top,false)}
+    });
     function greetBot(message,title,sub,icon){
       clearTimeout(botTimer);bot.classList.remove('waving','handing');void bot.offsetWidth;bot.classList.add('handing');
       botMessage.textContent=message;handoverTitle.textContent=title;handoverSub.textContent=sub;handoverIcon.textContent=icon;
@@ -228,7 +272,7 @@
     }
     botToggle.addEventListener('click',()=>{
       if(bubble.classList.contains('show')){bubble.classList.remove('show');botToggle.setAttribute('aria-expanded','false');clearTimeout(botTimer)}
-      else{botHidden=false;showByte(byteMessages[currentSection]||byteMessages.top,false)}
+      else{botHidden=false;byteDestination='';botActionLabel='';showByte(byteMessages[currentSection]||byteMessages.top,false)}
     });
     botDismiss.addEventListener('click',()=>{clearTimeout(botTimer);bubble.classList.remove('show');handover.classList.remove('show');botHidden=true;botToggle.setAttribute('aria-expanded','false')});
     const sectionObserver=new IntersectionObserver(entries=>{
