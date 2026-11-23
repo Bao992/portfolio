@@ -30,10 +30,10 @@
     .timeline{display:grid;grid-template-columns:1fr 1fr;gap:15px}.timeline-item{padding:20px;border:1px solid var(--line);border-radius:12px;background:rgba(16,22,34,.5)}.timeline-item .date{font:10px var(--mono);color:var(--cyan)}.timeline-item h3{font:600 16px var(--display);margin:8px 0 4px}.timeline-item p{font-size:12px;color:var(--muted);margin:0}
     .contact-box{border:1px solid rgba(110,231,249,.24);border-radius:18px;padding:clamp(25px,5vw,48px);background:radial-gradient(circle at 90% 10%,rgba(124,156,255,.13),transparent 35%),linear-gradient(135deg,rgba(16,28,43,.9),rgba(12,17,27,.95));display:flex;justify-content:space-between;align-items:center;gap:28px}.contact-box h2{font:600 clamp(30px,4vw,44px)/1.1 var(--display);letter-spacing:-.04em;margin:10px 0}.contact-box p{color:var(--muted);font-size:14px;max-width:530px;margin:0}.contact-actions{display:flex;flex-direction:column;gap:10px;min-width:165px}.footer{padding:28px 0 40px;display:flex;justify-content:space-between;gap:20px;color:var(--soft);font:10px var(--mono)}.footer a{color:var(--muted)}.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.reveal.visible{opacity:1;transform:none}
 
-    .welcome-bot{position:absolute;right:0;bottom:0;z-index:7;display:flex;flex-direction:column;align-items:flex-end;gap:7px;pointer-events:none}
-    .welcome-bubble{max-width:230px;padding:10px 13px;border:1px solid rgba(110,231,249,.35);border-radius:13px 13px 3px 13px;background:rgba(12,20,34,.97);box-shadow:0 12px 34px #0007,0 0 24px rgba(110,231,249,.1);color:#eaf6ff;font-size:11px;line-height:1.5;opacity:0;transform:translateY(9px);transition:opacity .25s,transform .25s}
+    .welcome-bot{position:fixed;right:max(18px,calc((100vw - var(--max))/2));bottom:18px;z-index:50;display:flex;flex-direction:column;align-items:flex-end;gap:7px;pointer-events:auto}
+    .welcome-bubble{position:relative;max-width:250px;padding:12px 34px 12px 14px;border:1px solid rgba(110,231,249,.35);border-radius:13px 13px 3px 13px;background:rgba(12,20,34,.97);box-shadow:0 12px 34px #0007,0 0 24px rgba(110,231,249,.1);color:#eaf6ff;font-size:11px;line-height:1.5;opacity:0;transform:translateY(9px);transition:opacity .25s,transform .25s}
     .welcome-bubble.show{opacity:1;transform:translateY(0)}
-    .welcome-bubble strong{color:var(--cyan)}
+    .welcome-bubble strong{display:block;color:var(--cyan);font:10px var(--mono);letter-spacing:.08em;margin-bottom:4px}.bot-message{display:block}.bot-toggle{border:0;background:transparent;padding:0;cursor:pointer;line-height:0}.bot-toggle:focus-visible,.bot-dismiss:focus-visible{outline:2px solid var(--cyan);outline-offset:4px;border-radius:10px}.bot-dismiss{position:absolute;right:8px;top:7px;border:0;background:transparent;color:var(--soft);font-size:16px;cursor:pointer;padding:0 4px}.bot-dismiss:hover{color:var(--cyan)}
     .robot-mascot{width:108px;height:132px;overflow:visible;filter:drop-shadow(0 10px 18px rgba(0,0,0,.4));animation:robot-enter .7s cubic-bezier(.2,.8,.2,1) both}
     .robot-arm{transform-box:view-box;transform-origin:96px 86px;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
     .robot-mascot.waving .robot-arm{animation:robot-wave .55s ease-in-out 3}
@@ -48,7 +48,7 @@
     @keyframes robot-wave{0%,100%{transform:rotate(-8deg)}35%,70%{transform:rotate(26deg)}}
     @keyframes robot-lean{50%{transform:translateX(-7px) rotate(-3deg)}}
     @keyframes robot-blink{0%,45%,49%,100%{transform:scaleY(1)}47%{transform:scaleY(.12)}}
-    @media(max-width:620px){.welcome-bot{right:-4px;bottom:0}.robot-mascot{width:88px;height:108px}.welcome-bubble{max-width:195px;font-size:10px}.handover-card{right:66px;bottom:50px;min-width:136px;padding:8px}.handover-icon{width:26px;height:26px}}
+    @media(max-width:620px){.welcome-bot{right:12px;bottom:12px}.robot-mascot{width:88px;height:108px}.welcome-bubble{max-width:215px;font-size:10px}.handover-card{right:66px;bottom:50px;min-width:136px;padding:8px}.handover-icon{width:26px;height:26px}}
     @media(prefers-reduced-motion:reduce){.robot-mascot,.robot-arm,.robot-eye{animation:none!important}.welcome-bubble,.handover-card{transition:none!important}}
     @media(max-width:850px){.hero{grid-template-columns:1fr;gap:10px;padding:70px 0 65px}.visual{min-height:370px}.about-grid,.agentic{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}.contact-box{align-items:flex-start;flex-direction:column}.contact-actions{flex-direction:row;flex-wrap:wrap}.skills-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:620px){.container{width:min(100% - 32px,var(--max))}nav{height:66px}.menu-btn{display:block}.nav-links{display:none;position:absolute;top:65px;left:0;right:0;padding:18px 24px 22px;background:rgba(8,11,18,.97);border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:17px}.nav-links.open{display:flex}.hero{padding-top:58px}h1{font-size:55px}.visual{min-height:330px}.float-a{left:-4px}.float-b{right:-5px}.projects-grid,.timeline{grid-template-columns:1fr}.skills-grid{grid-template-columns:1fr 1fr}section{padding:65px 0}.section-head{margin-bottom:27px}.footer{flex-direction:column}.project-art{height:135px}}
@@ -84,10 +84,10 @@
           <div class="agent-row"><span class="agent-icon">02</span><span class="agent-text"><b>Explore</b><small>AGENTIC WORKFLOWS</small></span><span class="agent-state">LEARNING</span></div>
           <div class="agent-row"><span class="agent-icon">03</span><span class="agent-text"><b>Verify</b><small>QUALITY & RELIABILITY</small></span><span class="agent-state">FOCUS</span></div>
         </div>
-        <div class="welcome-bot" id="welcomeBot" aria-label="BAO AI LAB welcome robot">
-          <div class="welcome-bubble show" id="botBubble" role="status" aria-live="polite"><strong>Hey there! 👋</strong><br/>Welcome to BAO AI LAB. I'm your little guide. Let's explore!</div>
+        <div class="welcome-bot" id="welcomeBot" aria-label="Byte, your BAO AI LAB portfolio guide">
+          <div class="welcome-bubble show" id="botBubble" role="status" aria-live="polite"><button class="bot-dismiss" id="botDismiss" type="button" aria-label="Dismiss Byte message">×</button><strong>BYTE · YOUR PORTFOLIO GUIDE</strong><span class="bot-message" id="botMessage">Hey there! 👋 Welcome to BAO AI LAB. I can show you around.</span></div>
           <div class="handover-card" id="handoverCard" aria-hidden="true"><span class="handover-icon" id="handoverIcon">↗</span><span class="handover-copy"><b id="handoverTitle">Your next stop</b><small id="handoverSub">OPENING LINK</small></span></div>
-          <svg class="robot-mascot waving" id="robotMascot" viewBox="0 0 140 160" role="img" aria-label="Friendly robot waving hello">
+          <button class="bot-toggle" id="botToggle" type="button" aria-label="Ask Byte for a tour" aria-expanded="true"><svg class="robot-mascot waving" id="robotMascot" viewBox="0 0 140 160" role="img" aria-label="Byte, a friendly robot waving hello">
             <defs><linearGradient id="botShell" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e4f5ff"/><stop offset=".5" stop-color="#8fa9c9"/><stop offset="1" stop-color="#425675"/></linearGradient><linearGradient id="botFace" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14283e"/><stop offset="1" stop-color="#091522"/></linearGradient><linearGradient id="botGlow"><stop stop-color="#8df4ff"/><stop offset="1" stop-color="#789dff"/></linearGradient></defs>
             <ellipse cx="70" cy="151" rx="35" ry="6" fill="#060a12" opacity=".55"/><path d="M70 8V17" stroke="#8eeeff" stroke-width="3" stroke-linecap="round"/><circle cx="70" cy="6" r="4" fill="#8eeeff"/>
             <rect x="34" y="18" width="72" height="57" rx="20" fill="url(#botShell)" stroke="#d9f3ff" stroke-opacity=".7"/><rect x="40" y="25" width="60" height="43" rx="15" fill="url(#botFace)" stroke="#7bdff1" stroke-opacity=".55"/>
@@ -97,7 +97,7 @@
             <path d="M43 83L29 105" stroke="#91abc9" stroke-width="10" stroke-linecap="round"/><circle cx="27" cy="108" r="7" fill="#d6edfa"/>
             <g class="robot-arm" id="robotArm"><path d="M96 83L111 65" stroke="#91abc9" stroke-width="11" stroke-linecap="round"/><circle cx="113" cy="63" r="7" fill="#d6edfa" stroke="#8eeeff"/><path d="M112 58L111 49M117 59L122 52M119 64L128 61" stroke="#d6edfa" stroke-width="4" stroke-linecap="round"/></g>
             <path d="M51 127L48 139M89 127L92 139" stroke="#91abc9" stroke-width="10" stroke-linecap="round"/><path d="M39 141H56M84 141H101" stroke="#d6edfa" stroke-width="7" stroke-linecap="round"/>
-          </svg>
+          </svg></button>
         </div>
       </div>
     </header>
@@ -203,15 +203,40 @@
     const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.08});
     document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
     const bot=document.getElementById('robotMascot'),bubble=document.getElementById('botBubble'),handover=document.getElementById('handoverCard');
+    const botMessage=document.getElementById('botMessage'),botToggle=document.getElementById('botToggle'),botDismiss=document.getElementById('botDismiss');
     const handoverTitle=document.getElementById('handoverTitle'),handoverSub=document.getElementById('handoverSub'),handoverIcon=document.getElementById('handoverIcon');
-    let botTimer;
+    let botTimer,botHidden=false,currentSection='top';
+    const byteMessages={
+      top:"Hey there! 👋 I'm Byte. Welcome to Bao's digital workshop. Want a quick tour?",
+      about:"A little about the human behind the keyboard: Bao is a Computer Science and Mathematics student who learns by building.",
+      work:"Project time! NutriTrack explores multi-agent workflows, while FixFlow focuses on maintenance accountability. Pick a card to explore.",
+      agentic:"This is the AI corner. Bao is exploring agent roles, tools, APIs, collaboration and human verification.",
+      skills:"Here's Bao's current toolkit, from frontend and backend development to databases and AI-assisted workflows.",
+      journey:"Every builder has a story. This section shows Bao's studies, practical learning and development journey.",
+      contact:"Interested in building something together? Bao would be happy to hear from you."
+    };
+    function showByte(message,autoHide=true){
+      clearTimeout(botTimer);botMessage.textContent=message;bubble.classList.add('show');botToggle.setAttribute('aria-expanded','true');
+      bot.classList.remove('handing');bot.classList.add('waving');
+      if(autoHide)botTimer=setTimeout(()=>{bubble.classList.remove('show');botToggle.setAttribute('aria-expanded','false')},6500);
+    }
     function greetBot(message,title,sub,icon){
       clearTimeout(botTimer);bot.classList.remove('waving','handing');void bot.offsetWidth;bot.classList.add('handing');
-      bubble.innerHTML='<strong>'+message+'</strong>';
-      handoverTitle.textContent=title;handoverSub.textContent=sub;handoverIcon.textContent=icon;
-      bubble.classList.add('show');handover.classList.add('show');
-      botTimer=setTimeout(()=>{handover.classList.remove('show');bot.classList.remove('handing');bot.classList.add('waving');bubble.classList.remove('show')},2400);
+      botMessage.textContent=message;handoverTitle.textContent=title;handoverSub.textContent=sub;handoverIcon.textContent=icon;
+      bubble.classList.add('show');handover.classList.add('show');botToggle.setAttribute('aria-expanded','true');
+      botTimer=setTimeout(()=>{handover.classList.remove('show');bot.classList.remove('handing');bot.classList.add('waving');bubble.classList.remove('show');botToggle.setAttribute('aria-expanded','false')},2600);
     }
+    botToggle.addEventListener('click',()=>{
+      if(bubble.classList.contains('show')){bubble.classList.remove('show');botToggle.setAttribute('aria-expanded','false');clearTimeout(botTimer)}
+      else{botHidden=false;showByte(byteMessages[currentSection]||byteMessages.top,false)}
+    });
+    botDismiss.addEventListener('click',()=>{clearTimeout(botTimer);bubble.classList.remove('show');handover.classList.remove('show');botHidden=true;botToggle.setAttribute('aria-expanded','false')});
+    const sectionObserver=new IntersectionObserver(entries=>{
+      const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+      if(!visible)return;currentSection=visible.target.id||'top';
+      if(!botHidden&&currentSection!=='top'&&!handover.classList.contains('show'))showByte(byteMessages[currentSection]||byteMessages.top);
+    },{threshold:[.35,.6]});
+    document.querySelectorAll('main > section[id]').forEach(section=>sectionObserver.observe(section));
     document.querySelectorAll('a[href]').forEach(link=>{
       const href=link.getAttribute('href')||'';
       if(!href.startsWith('http')) return;
@@ -220,9 +245,9 @@
       else if(href.includes('linkedin.com')){label='My LinkedIn',sub='LET’S CONNECT',icon='in'}
       else if(href.toLowerCase().endsWith('.pdf')){label='My CV',sub='CURRICULUM VITAE',icon='PDF'}
       else if(href.includes('vercel.app')||href.includes('netlify.app')){label='Live application',sub='OPEN PROJECT DEMO',icon='▶'}
-      link.addEventListener('click',()=>greetBot('Here you go! 👋',label,sub,icon));
+      link.addEventListener('click',()=>{botHidden=false;greetBot('Here you go! 👋',label,sub,icon)});
     });
-    setTimeout(()=>{bubble.classList.remove('show')},6500);
+    setTimeout(()=>{bubble.classList.remove('show');botToggle.setAttribute('aria-expanded','false')},8500);
   </script>
 </body>
 </html>
