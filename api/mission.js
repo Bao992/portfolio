@@ -111,7 +111,16 @@ module.exports = async function handler(req, res) {
       return res.status(503).json({ error: "Mission Control is not configured yet. Add GEMINI_API_KEY to the Vercel project environment variables." });
     }
     if (error.status === 429) return res.status(429).json({ error: "The free AI usage limit has been reached. Please try again later." });
-    if (error.status === 503) return res.status(503).json({ error: "Gemini is temporarily unavailable. Please wait a moment before retrying." });
+    if (error.status === 503) {
+  console.error("Gemini 503 diagnostic:", {
+    model: error.model,
+    providerMessage: error.providerMessage
+  });
+
+  return res.status(503).json({
+    error: "Gemini is temporarily unavailable. Please check the deployment logs."
+  });
+}
     if (error.status === 504) return res.status(504).json({ error: "A Gemini response took too long. The mission was stopped safely; please retry once the service is responsive." });
     console.error("Mission Control API error:", error.status || error.code || "unknown", error.providerMessage || "");
     return res.status(502).json({ error: "The agent team could not complete this mission. Please try again shortly." });
